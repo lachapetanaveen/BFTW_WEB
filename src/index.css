@@ -11,3 +11,52 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.footer {
+  /* Styles for the footer */
+   display:flex;
+  justify-content: space-around;
+  align-items: center;
+  /* position: absolute;
+  bottom: 0;
+  justify-content: space-between; */
+  margin-bottom: 18px;
+}
+.footer-wrapper {
+  position: relative;
+}
+.footimgsize {
+  width:48px;
+  height:48px;
+}
+.mobcenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+.item {
+  margin-top: 20px;
+}
+.iconsize {
+  font-size: 52px;
+}
+.mal-2 {
+  margin-left: 16px;
+}
+.mal-4 {
+  margin-left:24px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  /* align-items:center */
+  /* min-height: 100vh; */
+}
+.flex {
+  display:flex
+}
+.ml-4 {
+  margin-left: 6px;
+}
