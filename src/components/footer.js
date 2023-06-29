@@ -1,55 +1,60 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faApple, } from '@fortawesome/free-brands-svg-icons';
-
+import { faApple, faFacebook, faGooglePay, faGooglePlay, faInstagram, faTwitter, } from '@fortawesome/free-brands-svg-icons';
+import MailIcon from '@mui/icons-material/Mail'
 const Footer = () => {
 
     return ( 
-        <div style={{position:'absolute',bottom:10,width:'100%'}}>
-            <div className='row'>
-                <div className='col-md-4'>
-                <div style={{ color: 'black',marginTop:'20px',marginLeft:'30px',fontFamily:'Times New Roman", Times, serif' }} className='flex cursor-pointer text-decoration-underline'>
-                      <a  target="_blank" rel="noopener noreferrer" style={{ color: '#0A1A44' }}>
-                          Privacy Policy
-                      </a>
-                  </div>
-                </div>
-                <div className='col-md-4'>
-                <p style={{ color: 'black',marginTop:'20px' }}>{`©Copyright ${new Date().getFullYear()}. BFTW.com All Rights Reserved`}</p>
-                </div>
-                <div className='col-md-4'>
-                <div className='flex mobcenter'>
-                      <div className='flex'>
-                          <div>
-                              <FontAwesomeIcon className='iconsize'  icon={faApple} />
-                          </div>
-                          <div className='mal-2 mobdis'>
-                              <p>Get it on the </p>
-                              <h5>App Store</h5>
-                          </div>
-                      </div>
-                      <div className='flex ml-4'>
-                          <div >
-                              <img className='footimgsize'  src={require('../assets/playstore.png')} />
-                          </div>
-                          <div className='mal-2 mobdis'>
-                              <p>Get it on the </p>
-                              <h5>Google Play</h5>
-                          </div>
-                      </div>
-                      <div className='flex ml-4'>
-                          <div >
-                              <img className='footimgsize'  src={require('../assets/microsoft.png')} />
-                          </div>
-                          <div className='mal-2 mobdis'>
-                              <p>Get it on the </p>
-                              <h5>Microsoft Store</h5>
-                          </div>
-                      </div>
-                  </div>
-                </div>
+
+
+<footer class="footer-distributed footer">
+<div className='row'>
+    <div className='col-md-4'>
+        <img style={{width:'40%'}} src={require('../assets/bftw_new.png')} />
+    </div>
+    <div style={{marginTop:'40px'}} className='col-md-4'>
+    <p style={{fontSize:'16px',color:'black'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
+    </div>
+    <div style={{marginTop:'40px'}} className='col-md-4'>
+        <div style={{display:'flex'}}>
+            <div style={{marginLeft:'10px'}}>
+            <FontAwesomeIcon className='iconsize'  icon={faFacebook} />
+            </div>
+            <div style={{marginLeft:'10px'}}>
+            <FontAwesomeIcon className='iconsize'  icon={faInstagram} />
+            </div>
+            <div style={{marginLeft:'10px'}}>
+            <FontAwesomeIcon className='iconsize'  icon={faGooglePlay} />
+            </div>
+            <div style={{marginLeft:'10px'}}>
+            <FontAwesomeIcon className='iconsize'  icon={faTwitter} />
             </div>
         </div>
+    </div>
+</div>
+{/* <div class="footer-right">
+
+    <a href="#"></a>
+    <a href="#"><i class="fa fa-twitter"></i></a>
+    <a href="#"><i class="fa fa-linkedin"></i></a>
+    <a href="#"><i class="fa fa-github"></i></a>
+
+</div>
+
+<div class="footer-left">
+    <div className='navbar-header'>
+    <img style={{width:'15%',height:'15%'}}src={require('../assets/bftw_new.png')} />
+        
+    </div>
+
+    <p style={{fontSize:'20px',color:'black'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
+        
+    
+
+</div> */}
+
+</footer>
+        
       
      );
 }
