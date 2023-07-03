@@ -11,11 +11,16 @@ import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import { FaTimes } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const [email,setEmail] = React.useState('');
   const [password,setPassword] = React.useState('');
   const [data,setData] = React.useState()
+  let navigate = useNavigate()
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   React.useEffect(() => {
@@ -32,6 +37,11 @@ export default function Header() {
     }
   }
   const submitdata = async() => {
+    if(!email){
+      toast.error('Enter Email')
+    }else if(!password){
+      toast.error('Enter Password')
+    }else{
       try {
         const obj ={
           email:email,
@@ -40,10 +50,18 @@ export default function Header() {
         const det = JSON.stringify(obj)
         const dataa = await localStorage.setItem('localdata',det);
          setData(obj)
+         toast.success('Login SuccessFully')
+        navigate('/AllUsers')
         handleClose()
       } catch (ex) {
         
       }
+    }
+     
+  }
+  const logout = () => {
+    localStorage.removeItem('localdata');
+    navigate('/home')
   }
   console.log('====================================');
   console.log(data,'data');
@@ -54,18 +72,25 @@ return (
   <div class="container-fluid">
     <div class="navbar-header">
       {/* <a class="navbar-brand" href="#">WebSiteName</a> */}
-      <img style={{width:'15%',height:'15%'}}src={require('../assets/bftw_new.png')} />
+      <img style={{width:'25%',height:'15%'}}src={require('../assets/bftw_new.png')} />
     </div>
-    <ul class="nav navbar-nav">
-      <li><a style={{fontSize:'20px'}}href="#">Home</a></li>
-      <li><a style={{fontSize:'20px'}}href="#">About</a></li>
-      <li> <a style={{fontSize:'20px'}}href="#">Contact Us</a></li>
+    {data && (data !== null || data !== undefined) ? 
+      null:
+      <ul class="nav navbar-nav">
+      <li className="menulist"><Link style={{fontSize:'20px'}}to={'/home'}>Home</Link></li>
+      <li className="menulist"><Link style={{fontSize:'20px'}} to={'/about'}>About</Link></li>
+      <li className="menulist"> <Link style={{fontSize:'20px'}} to={'/contact'}>Contact Us</Link></li>
       {/* <li><a href="#">Page 3</a></li> */}
     </ul>
+
+    }
+    
     <div style={{float:'right'}}>
     {data && (data !== null || data !== undefined) ? 
-        <div >
-          <p style={{color:'black'}}>{data.email}</p>
+        <div style={{display:'flex'}}>
+          <p className="logdata" style={{color:'black'}}>{data.email}</p>
+          <button  onClick={() => logout()} className="btn btn-sm  btn-primary cusbtn"> Logout
+        </button>
         </div> : 
         <button  onClick={() => handleOpen()} className="btn btn-lg btn-primary"> Login
         </button>
@@ -106,9 +131,10 @@ return (
                 {/* <p className="text-gray">X</p> */}
               </div>
             </div>
+            <img style={{width:'90px',height:'90px',marginLeft:'40%'}}src={require('../assets/logo (1).png')} />
             <div className="p-4">
               <div>
-              <div style={{marginTop:'26px'}}>
+              <div style={{marginTop:'26px',}}>
                 <div>
                 <label className="text-sm">Email</label>
                       <input
@@ -117,7 +143,7 @@ return (
                         id="first_name"
                         contentEditable={true}
                         onChange={(e) => setEmail(e.target.value)}
-                    style={{position:'relative',display:'block',borderRadius:10,width:'100%',height:'30px',borderColor:'gray',borderWidth:0.5}}
+                    style={{position:'relative',marginTop:'20px',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
                       
                       />
                 </div>
@@ -125,12 +151,12 @@ return (
                       <div style={{marginTop:'20px'}}>
                       <label className="text-sm">Password</label>
                       <input
-                        type="text"
+                        type="password"
                         aria-label="First name"
                         id="first_name"
                         contentEditable={true}
                         onChange={(e) => setPassword(e.target.value)}
-                    style={{position:'relative',display:'block',borderRadius:10,width:'100%',height:'30px',borderColor:'gray',borderWidth:0.5}}
+                    style={{position:'relative',display:'block',borderRadius:10,width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
                       />
                       </div>
                       

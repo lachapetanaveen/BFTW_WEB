@@ -152,10 +152,35 @@ section {
 }
 .navbar-default {
   padding: 10px !important;
+  background-color: #fff !important;
+  box-shadow:1px 2px 9px #F4AAB9,
   
 }
 .navbar-header {
-  width: 60%;
+  width: 56%;
+}
+.menulist {
+  margin-left: 20px;
+}
+.navbar-nav {
+  flex-direction: row !important;
+}
+.logdata {
+  color: black;
+  margin-top: 20px;
+  margin-right: 19px;
+  
+}
+.cusbtn {
+  height: 34px;
+    margin-top: 18px;
+    float: right;
+    position:relative;
+}
+.maincont {
+  width: 50%;
+    margin-left: 16%;
+    
 }
 /* Media Queries */
 
@@ -171,3 +196,4 @@ section {
     line-height: 1.8;
   }
 }
+
