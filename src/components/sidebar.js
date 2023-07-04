@@ -45,7 +45,7 @@ class MainMenu extends React.Component {
     const getMenus = menuArray => menuArray.map((item, index) => {
       if (item.child) {
         return (
-          <div key={index.toString()}>
+          <div  key={index.toString()}>
             <ListItem
               button
               className={classNames(classes.head, open.indexOf(item.key) > -1 ? classes.opened : '')}

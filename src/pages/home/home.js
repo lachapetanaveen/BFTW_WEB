@@ -12,7 +12,8 @@ import Typography from '@mui/material/Typography';
 const Home = () => {
 
     return ( 
-        <div className='wrapper'>
+      
+        <div style={{borderRadius:'20px',borderBlockColor:'gray'}}className='wrapper'>
             <Header />
             <div className='container-fluid'>
             <div style={{marginTop:'60px',fontFamily:'bold'}} className='row'>
@@ -20,7 +21,7 @@ const Home = () => {
                 <Card sx={{maxWidth:345}}>
       <CardMedia
         sx={{ widows:50,height: 150 }}
-      image={require('../../assets/pexels-photo-842711.jpeg')}
+      image={require('../../assets/istockphoto-1412543316-1024x1024.jpg')}
         title="green iguana"
       />
       <CardContent>
@@ -43,7 +44,7 @@ const Home = () => {
                 <Card sx={{maxWidth:345}}>
       <CardMedia
         sx={{ widows:50,height: 150 }}
-      image={require('../../assets/pexels-photo-842711.jpeg')}
+      image={require('../../assets/photo-1593112038458-246525299766.avif')}
         title="green iguana"
       />
       <CardContent>
@@ -67,7 +68,7 @@ const Home = () => {
                 <Card sx={{maxWidth:345}}>
       <CardMedia
         sx={{ widows:50,height: 150 }}
-      image={require('../../assets/pexels-photo-842711.jpeg')}
+      image={require('../../assets/Gods-Love.jpg')}
         title="green iguana"
       />
       <CardContent>
@@ -88,7 +89,8 @@ const Home = () => {
                 </div>
             </div>
             </div>
-            <Footer />
+            
+            <Footer  />
         </div>
      );
 }

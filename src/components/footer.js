@@ -10,15 +10,15 @@ const Footer = () => {
 <footer class="footer-distributed footer">
 <div className='row'>
     <div className='col-md-4'>
-        <img style={{width:'40%'}} src={require('../assets/bftw_new.png')} />
+        <img style={{width:'40%',float:'right'}} src={require('../assets/bftw_new.png')} />
     </div>
-    <div style={{marginTop:'40px'}} className='col-md-4'>
+    <div style={{marginTop:'40px',}} className='col-md-4'>
     <p style={{fontSize:'16px',color:'black'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
     </div>
     <div style={{marginTop:'40px'}} className='col-md-4'>
         <div style={{display:'flex'}}>
-            <div style={{marginLeft:'10px'}}>
-            <FontAwesomeIcon className='iconsize'  icon={faFacebook} />
+            <div style={{marginLeft:'10px',}}>
+            <FontAwesomeIcon  className='iconsize'  icon={faFacebook} />
             </div>
             <div style={{marginLeft:'10px'}}>
             <FontAwesomeIcon className='iconsize'  icon={faInstagram} />
