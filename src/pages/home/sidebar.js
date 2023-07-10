@@ -34,11 +34,12 @@ const sendpage = (item) => {
     navigate(`/${tt}`)
 }
   const drawer = (
-    <div>
+    <div style={{
+  }}>
       <Toolbar />
       <Divider />
       <List>
-        {['All Users','Myprofile', 'Videos', 'Donate','Ministries'].map((text, index) => (
+        {['All Users','Myprofile', 'Resources',].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={() => sendpage(text)}>
               <ListItemIcon>
@@ -56,7 +57,7 @@ const sendpage = (item) => {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -65,7 +66,7 @@ const sendpage = (item) => {
           ml: { sm: `${drawerWidth}px` },
         }}
       >
-        <Toolbar style={{backgroundColor:'white'}}>
+        <Toolbar style={{backgroundColor:'lightblue'}}>
           <IconButton
             color="inherit"
             aria-label="open drawer"

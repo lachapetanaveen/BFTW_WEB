@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faApple, faFacebook, faGooglePay, faGooglePlay, faInstagram, faTwitter, } from '@fortawesome/free-brands-svg-icons';
+import { faApple, faFacebook, faGooglePlay, faInstagram, faTwitter, } from '@fortawesome/free-brands-svg-icons';
 import MailIcon from '@mui/icons-material/Mail'
 const Footer = () => {
 
@@ -10,7 +10,7 @@ const Footer = () => {
 <footer class="footer-distributed footer">
 <div className='row'>
     <div className='col-md-4'>
-        <img style={{width:'40%',float:'right'}} src={require('../assets/bftw_new.png')} />
+        <img style={{width:'40%',float:'left'}} src={require('../assets/bftw_new.png')} />
     </div>
     <div style={{marginTop:'40px',}} className='col-md-4'>
     <p style={{fontSize:'16px',color:'black'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
