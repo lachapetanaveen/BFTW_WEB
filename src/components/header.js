@@ -65,15 +65,13 @@ export default function Header() {
     localStorage.removeItem('localdata');
     navigate('/home')
   }
-  console.log('====================================');
-  console.log(data,'data');
-  console.log('====================================');
+
 return (
     <>
-    <nav class="navbar navbar-default">
-  <div style={{backgroundColor:'#063a6d',padding:'10px',}}class="container-fluid">
+    {/* <nav class="navbar navbar-default">
+  <div >
     <div class="navbar-header">
-      {/* <a class="navbar-brand" href="#">WebSiteName</a> */}
+    
       <img style={{width:'25%',height:'15%'}}src={require('../assets/bftw_new.png')} />
     </div>
     {data && (data !== null || data !== undefined) ? 
@@ -82,7 +80,6 @@ return (
       <li className="menulist"><Link style={{fontSize:'20px',color:'white'}}to={'/home'}>Home</Link></li>
       <li className="menulist"><Link style={{fontSize:'20px',color:'white'}} to={'/about'}>About</Link></li>
       <li className="menulist"> <Link style={{fontSize:'20px',color:'white'}} to={'/contact'}>Contact Us</Link></li>
-      {/* <li><a href="#">Page 3</a></li> */}
     </ul>
 
     }
@@ -100,11 +97,29 @@ return (
         
     </div>
   </div>
-</nav>
+</nav> */}
+<nav>
+      <div className="navbar-container">
+        <div className="logo">
+          <img className="logo_img"  src={require('../assets/bftw_new.png')} />
+        </div>
+        <ul className="nav-links">
+          <li><Link style={{color:'white'}}to={'/home'}>Home</Link></li>
+          <li><Link style={{color:'white'}} to={'/about'}>About</Link></li>
+          <li><Link style={{color:'white'}} to={'/contact'}>Contact</Link></li>
+          {data && (data !== null || data !== undefined) ? 
+            <button  onClick={() => logout()} className="btn btn-sm btn-white"> Logout
+            </button>
+          :
+          <button  onClick={() => handleOpen()} className="btn btn-sm btn-white"> Login
+        </button>}
+        </ul>
+      </div>
+    </nav>
   
 <Modal
         // className="max-sm:w-full"
-        style={{width:'80%'}}
+        style={{width:'80%',borderRadius:10}}
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -118,25 +133,34 @@ return (
         }}
       >
         <Fade in={open}>
-          <Box style={{width:'40%',position:'absolute',top:'30%',backgroundColor:'white',left:'40%',padding:'20px'}} className="absolute top-1/2 bg-theme left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:w-1/4 lg:1/4 h-auto bg-background-paper shadow-24 p-4">
-            <div className="flex w-full  ">
+          <Box style={{width:'50%',position:'absolute',top:'30%',backgroundColor:'white',left:'40%',borderRadius:10}} >
+            {/* <div className="flex w-full  ">
               <div className="flex-1"></div>
               <div
                 onClick={handleClose}
                className="close"
-                // className="float-right cursor-pointer mt-2"
+             
               >
                 <div style={{display:'flex',backgroundColor:'red',width:30,height:30,borderRadius:100,alignItems:'center',justifyContent:'center',alignSelf:'flex-end'}}>
                 <FaTimes color="white" />
                 </div>
                 
-                {/* <p className="text-gray">X</p> */}
+              
+              </div>
+              <img style={{width:'25%'}}src={require('../assets/logo (1).png')} />
+            </div> */}
+            <div className="modal_header">
+              <div className="modal_logo">
+              <img style={{width:'25%'}}src={require('../assets/bftw_new.png')} />
+              </div>
+              <div onClick={handleClose} className="modal_close">
+              <FaTimes size={24} color="red" />
               </div>
             </div>
-            <img style={{width:'90px',height:'90px',marginLeft:'40%'}}src={require('../assets/logo (1).png')} />
+            
             <div className="p-4">
               <div>
-              <div style={{marginTop:'26px',}}>
+              <div style={{marginTop:'8px',}}>
                 <div>
                 <label className="text-sm">Email</label>
                       <input
@@ -145,7 +169,7 @@ return (
                         id="first_name"
                         contentEditable={true}
                         onChange={(e) => setEmail(e.target.value)}
-                    style={{position:'relative',marginTop:'20px',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
+                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
                       
                       />
                 </div>

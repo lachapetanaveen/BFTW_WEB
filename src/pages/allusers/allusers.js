@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react';
 import Header from '../../components/header';
 import data from '../../components/sample.json';
 import Footer from '../../components/footer';
-import Sidebar from './sidebar';
+import Sidebar from '../../components/sidebar';
 
 //  import FilterBox from './filterbox';
 const Dashboard = () => {
