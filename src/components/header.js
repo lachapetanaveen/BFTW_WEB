@@ -41,6 +41,8 @@ export default function Header() {
       toast.error('Enter Email')
     }else if(!password){
       toast.error('Enter Password')
+    }else if(email !== 'naveen@olivetech.net' && password !== '123456'){
+      toast.error('Invalid Email or Password')
     }else{
       try {
         const obj ={
@@ -69,7 +71,7 @@ export default function Header() {
 return (
     <>
     <nav class="navbar navbar-default">
-  <div class="container-fluid">
+  <div style={{backgroundColor:'#063a6d',padding:'10px',}}class="container-fluid">
     <div class="navbar-header">
       {/* <a class="navbar-brand" href="#">WebSiteName</a> */}
       <img style={{width:'25%',height:'15%'}}src={require('../assets/bftw_new.png')} />
@@ -77,9 +79,9 @@ return (
     {data && (data !== null || data !== undefined) ? 
       null:
       <ul class="nav navbar-nav">
-      <li className="menulist"><Link style={{fontSize:'20px'}}to={'/home'}>Home</Link></li>
-      <li className="menulist"><Link style={{fontSize:'20px'}} to={'/about'}>About</Link></li>
-      <li className="menulist"> <Link style={{fontSize:'20px'}} to={'/contact'}>Contact Us</Link></li>
+      <li className="menulist"><Link style={{fontSize:'20px',color:'white'}}to={'/home'}>Home</Link></li>
+      <li className="menulist"><Link style={{fontSize:'20px',color:'white'}} to={'/about'}>About</Link></li>
+      <li className="menulist"> <Link style={{fontSize:'20px',color:'white'}} to={'/contact'}>Contact Us</Link></li>
       {/* <li><a href="#">Page 3</a></li> */}
     </ul>
 
@@ -88,8 +90,8 @@ return (
     <div style={{float:'right'}}>
     {data && (data !== null || data !== undefined) ? 
         <div style={{display:'flex'}}>
-          <p className="logdata" style={{color:'black'}}>{data.email}</p>
-          <button  onClick={() => logout()} className="btn btn-sm  btn-primary cusbtn"> Logout
+          <p className="logdata" style={{color:'white',fontFamily:'bold'}}>{data.email}</p>
+          <button  onClick={() => logout()}  className="btn btn-sm  btn-primary cusbtn"> Logout
         </button>
         </div> : 
         <button  onClick={() => handleOpen()} className="btn btn-lg btn-primary"> Login
@@ -200,6 +202,7 @@ return (
               <div>
                 
               </div>
+             
             </div>
           </Box>
         </Fade>

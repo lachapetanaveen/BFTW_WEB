@@ -28,8 +28,18 @@ Chawnga had four sons. One was named Rochunga. As Ro grew older, he knew that Go
 Six days later, Ro arrived safely in the village of Churachandpur and started school. He later continued his schooling in England, and then did his graduate work at Wheaton College in Chicago, Illinois.
 
 During his time in school, Ro worked hard on translating the Bible into his native language. to hundreds of thousands that reach significant numbers of people within a very short time period.
-</p>
-<iframe style={{right:'20px',position:'fixed'}}width="450" height="250"  src="https://www.youtube.com/embed/2AuDhWiO2D4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Bibles For The World is introducing a new book — Learn the Bible in a YEAR — to encourage people across the USA with the message that God’s Word transforms lives.  It’s a collaboration with the book’s author, Dr. Shane W. Houle, whose desire it is that everyone, everywhere should be able to read and understand the most important book ever published.
+
+“When Philip met the Ethiopian gentleman riding in his chariot and reading the prophet Isaiah, he asked, ‘Do you understand what you are reading?’” notes Houle.  “‘How can I,’ the man answered, ‘unless someone explains it to me?’  That’s the premise for this book.  I wanted people to be able to easily understand God’s story from beginning to end.  And I’m delighted that Bibles For The World wants to make the book available to people, not only in the USA, but also in translations around the globe!”
+
+‘We’ve actually launched a series of radio programs based upon the book,” Pudaite notes.  “A new program each day for 365 days walks listeners through the Bible and offers the book to those willing to help provide God’s Word around the world.  This is not just another Bible reading plan…rather it is a Bible learning plan.”  The daily 2-minute radio programs are currently airing on stations across the country and highlight a lesson from Scripture for each day.  You can listen to a sample by clicking here:
+“People who READ the Bible have a greater appreciation of the power of God’s Word to transform lives overseas,” says John Pudaite, president of Bibles For The World.  While the ministry focuses the vast majority of its activity across regions of the world where God’s Word is scarce, Pudaite is concerned about the growing level of Bible illiteracy in the United States.
+
+“Because of our focus on the power of God’s Word to transform lives we have a unique opportunity to help foster a new appreciation for the Bible — and to enlist more people in making God’s Word known to unreached peoples 365 days walks listeners through the Biblethose ..... 
+</p><div>
+    
+</div>
+
            </div>
            
             <Footer />

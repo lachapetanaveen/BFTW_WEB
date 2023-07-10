@@ -13,7 +13,7 @@ const Home = () => {
 
     return ( 
       
-        <div style={{borderRadius:'20px',borderBlockColor:'gray'}}className='wrapper'>
+        <div style={{borderRadius:'20px',borderBlockColor:'white'}}className='wrapper'>
             <Header />
             <div className='container-fluid'>
             <div style={{marginTop:'60px',fontFamily:'bold'}} className='row'>
