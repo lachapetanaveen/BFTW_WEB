@@ -1,7 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
-
 import React from 'react'
-import Home from './home';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 

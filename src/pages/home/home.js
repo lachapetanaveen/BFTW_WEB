@@ -13,10 +13,10 @@ const Home = () => {
 
     return ( 
       
-        <div style={{borderRadius:'20px',borderBlockColor:'white'}}className='wrapper'>
+        <div className='app_container'>
             <Header />
-            <div className='container-fluid'>
-            <div style={{marginTop:'60px',fontFamily:'bold'}} className='row'>
+            <div  className='container-fluid content'>
+            <div style={{marginTop:'60px',fontFamily:'bold'}} className='row justify-content-center align-items-center text-center'>
                 <div className='col-md-4'>
                 <Card sx={{maxWidth:345}}>
       <CardMedia

@@ -2,17 +2,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from "react";
 import Header from './components/header';
 import Home from "./pages/home/home";
-import About from "../src/pages/home/about";
-import ContactUs from './pages/home/contact';
-import Dashboard from './pages/home/dashboard';
+import About from "./pages/about/about";
+import ContactUs from './pages/contact/contact';
+import Dashboard from './pages/allusers/allusers';
 import { ToastContainer } from 'react-toastify';
-import MyProfile from './pages/home/myprofile';
-import Resources from './pages/home/resources';
-
-
-
-
-
+import MyProfile from './pages/myprofile/myprofile';
+import Resources from './pages/resources/resources';
+import AppRoutes from './routes/routes';
 
 
 function App() {
@@ -25,8 +21,10 @@ return (
 // </div> */}
 
 <>
+<AppRoutes />
 <ToastContainer />
-<BrowserRouter>
+
+{/* <BrowserRouter>
 <Routes>
 
   <Route path="/" element={<Home/>}/>
@@ -35,12 +33,9 @@ return (
   <Route path="/contact" element={<ContactUs/>}/>
   <Route path="/AllUsers" element={<Dashboard/>}/>
   <Route path="/MyProfile" element={<MyProfile/>}/>
-  {/* <Route path="/Donate" element={<Donate/>}/> */}
   <Route path="/Resources" element={<Resources/>}/>
-  {/* <Route path="/Ministries" element={<Ministries/>}/> */}
-
 </Routes>
-</BrowserRouter>
+</BrowserRouter> */}
 </>
 );
 }
