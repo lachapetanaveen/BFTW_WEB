@@ -3,6 +3,7 @@ import Header from '../../components/header';
 import data from '../../components/sample.json';
 import Footer from '../../components/footer';
 import Sidebar from '../../components/sidebar';
+import CustomSidebar from '../../components/customsidebar';
 
 //  import FilterBox from './filterbox';
 const Dashboard = () => {
@@ -25,13 +26,13 @@ const Dashboard = () => {
    }
  
     return (
-        <div>
+        <div className='app_container'>
              <Header />
-        
-        <div style={{display:'flex',minheight:'109px'}}>
-           
-            <Sidebar  />
-    <div style={{marginLeft:'40px'}}>
+             {/* <CustomSidebar /> */}
+        <div >
+       
+            {/* <Sidebar  /> */}
+    <div className="content" style={{marginLeft:'280px',}}>
          
         
        
@@ -39,18 +40,16 @@ const Dashboard = () => {
         <div class="row m-auto">
 
            
-            <div >
-              <h5 style={{backgroundColor:'lightblue'}}class="mt-3 mb-3 text-secondary">
-              All The Users-Data
-              </h5>
-                <div style={{float:'right'}} class="table-responsive">
+            <div style={{marginTop:'20px'}}>
+             
+                <div  class="table-responsive">
                     <table class="table table-striped">
                         <thead class="thead-light">
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Intrest
+                                <th>Interest
                                     <input value={searchvalue} onChange={(e) => searchdata(e.target.value)} placeholder='Searh Interests' style={{backgroundColor:'white',borderWidth:1,borderColor:'white',marginLeft:8,borderRadius:10,padding:6}} />
                                 </th>
                                 {/* <th>Record Data</th> */}
@@ -77,7 +76,7 @@ const Dashboard = () => {
    
     </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
     )
 }

@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import Dashboard from '../pages/allusers/allusers';
 import MyProfile from '../pages/myprofile/myprofile';
 import Resources from '../pages/resources/resources';
+import EnquiryCenter from '../pages/enquiry/enquiry';
 
 const PrivateRoutes = () => {
     return ( 
@@ -13,6 +14,7 @@ const PrivateRoutes = () => {
                 <Route path='/allusers' element={<Dashboard />} />
                 <Route path='/myprofile' element={<MyProfile />} />
                 <Route path='/resources' element={<Resources />} />
+                <Route path='/enquiry' element={<EnquiryCenter />} />
             </Route>
           </Routes>
         </>
