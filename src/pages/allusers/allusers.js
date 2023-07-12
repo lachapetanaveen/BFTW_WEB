@@ -32,20 +32,20 @@ const Dashboard = () => {
         <div >
        
             {/* <Sidebar  /> */}
-    <div className="content" style={{marginLeft:'280px',}}>
+    <div className="content" style={{marginLeft:'160px',padding:'20px',paddingTop:'8px'}}>
          
         
        
        
-        <div class="row m-auto">
+        <div className="m-auto">
 
            
             <div style={{marginTop:'20px'}}>
              
-                <div  class="table-responsive">
-                    <table class="table table-striped">
-                        <thead class="thead-light">
-                            <tr>
+                <div  className="table-box table-responsive">
+                    <table  className="table">
+                        <thead className="thead-light">
+                            <tr className='th-bg'>
                                 <th>No.</th>
                                 <th>Name</th>
                                 <th>Email</th>

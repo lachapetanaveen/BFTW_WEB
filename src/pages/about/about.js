@@ -1,11 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const About = () => {
-
+    let navigate = useNavigate()
+    useEffect(() => {
+      getdata()
+    },[])
+    const getdata = async() => {
+      const dert = await localStorage.getItem('localdata');
+      if(dert){
+        navigate('/allusers')
+      }
+    }
     return ( 
         <div className='app_container'>
 

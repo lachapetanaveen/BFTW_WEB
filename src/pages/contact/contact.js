@@ -1,12 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Button from "@mui/material/Button";
+import { useNavigate } from 'react-router-dom';
 
 function ContactUs() {
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
   const [message,setMessage] = useState('');
+  let navigate = useNavigate()
+useEffect(() => {
+  getdata()
+},[])
+const getdata = async() => {
+  const dert = await localStorage.getItem('localdata');
+  if(dert){
+    navigate('/allusers')
+  }
+}
   return (
     <div className='app_container'>
 

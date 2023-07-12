@@ -13,8 +13,8 @@ const Footer = () => {
     <div className='col-md-4'>
         <img style={{width:'24%',float:'left'}} src={require('../assets/bftw_new.png')} />
     </div>
-    <div style={{marginTop:'24px',}} className='col-md-4 d-flex justify-content-end'>
-    <p style={{fontSize:'12px',color:'white'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
+    <div style={{marginTop:'24px',}} className='col-md-4 d-flex justify-content-center'>
+    <p style={{fontSize:'14px',color:'white',fontWeight:'bold'}}>©Copyright 2023. BFTW.COM. All Rights Reserved</p>
     </div>
     <div style={{marginTop:'24px',}} className='col-md-4 d-flex justify-content-end'>
         <div style={{display:'flex'}}>
