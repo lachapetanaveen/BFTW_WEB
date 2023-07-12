@@ -1,15 +1,16 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
 }
 /* .footer {
   /* Styles for the footer */
@@ -33,6 +34,21 @@ code {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+}
+.table-box {
+  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+}
+.table .thead-light th {
+  color: white;
+  background-color: #031832;
+  border-color: #031832;
+}
+.table td, .table th {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  font-size: 13px;
+  font-weight: 500;
 }
 .item {
   margin-top: 20px;
@@ -277,7 +293,7 @@ input[type=file]::file-selector-button:hover {
   text-decoration: underline;
 }
 .logo_img {
-  width:10%;
+  width:8%;
 background-color: white;
 padding:6px;
 border-radius: 100px;
@@ -290,15 +306,21 @@ font-weight: 700;
 padding-left: 10px !important;
 padding-right:10px
 }
+.themebtnbg {
+  background: linear-gradient(to top, #f16000, #f17601,#f38501) !important;
+  color:white
+}
 .sidebar {
   position: fixed;
   /* top:84px; */
   height: 100vh;
   margin-top: 72px;
-  width: 200px;
+  width: 140px;
   /* background: linear-gradient(to top, #f16000, #f17601,#f38501) !important; */
-  background-color: #f1f1f1;
+  background-color: white;
   transition: all 0.3s;
+  border: 0.5px solid gray;
+  padding-right: 14px;
   /* z-index: -1; */
   /* overflow-y: auto; */
 }
@@ -347,6 +369,64 @@ padding-right:10px
   margin-right: 10px;
   display: inline-block;
   vertical-align: middle;
+}
+.chatbox {
+  /* width: 300px;
+  height: 400px; */
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chatbox-messages {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 320px;
+  overflow-y: scroll;
+}
+
+.chatbox-message {
+  width:200px;
+  background-color: #f2f2f2;
+  padding: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.chatbox-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.chatbox-input input {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chatbox-input button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.sender-you {
+  background-color: #4caf50;
+  color: white;
+  align-self: flex-end;
+}
+
+.sender-other {
+  background-color: #f2f2f2;
+  
+  
+  align-self: flex-start;
 }
 @media (max-width: 768px) {
   .sidebar.open {
