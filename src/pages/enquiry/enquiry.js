@@ -95,10 +95,10 @@ const handleClose = () => {
                     <table  className="table">
                         <thead className="thead-light">
                             <tr className='th-bg'>
-                                <th>User Name</th>
-                                <th>Email</th>
-                                <th>Message</th>
-                                <th>Actions</th>
+                                <th style={{fontWeight:700}}>User Name</th>
+                                <th style={{fontWeight:700}}>Email</th>
+                                <th style={{fontWeight:700}}>Message</th>
+                                <th style={{fontWeight:700}}>Actions</th>
                                 {/* <th>Record Data</th> */}
                             </tr>
                         </thead>
@@ -272,8 +272,7 @@ const handleClose = () => {
       </div>
       <Footer />
       </div>
-      <Modal
-       
+      <Modal 
        style={{width:'80%',borderRadius:10}}
        aria-labelledby="transition-modal-title"
        aria-describedby="transition-modal-description"
@@ -323,7 +322,7 @@ const handleClose = () => {
           onChange={handleInputChange}
           placeholder="Type your message..."
         />
-        <button onClick={handleSendMessage}>Send</button>
+        <button className='themebtnbg' onClick={handleSendMessage}>Send</button>
       </div>
     </div>
          </Box>

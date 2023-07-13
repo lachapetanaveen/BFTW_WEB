@@ -32,7 +32,6 @@ export default function Header() {
     }
   }
   const handleDropdownToggle = () => {
-    console.log('function calling');
     setIsDropdownOpen(!isDropdownOpen);
   };
 
@@ -52,7 +51,7 @@ export default function Header() {
       toast.error('Enter Email')
     }else if(!password){
       toast.error('Enter Password')
-    }else if(email !== 'naveen@olivetech.net' && password !== '123456'){
+    }else if(email !== 'naveen@olivetech.net' || password !== '123456'){
       toast.error('Invalid Email or Password')
     }else{
       try {
@@ -105,12 +104,12 @@ return (
                <div  style={{position:'absolute',backgroundColor:'white',right:20,boxShadow:'0 2px 5px rgba(0, 0, 0, 0.2)',top:60,borderRadius:'5px'}}>
                <div style={{padding:'10px'}}>
                <div style={{display:'flex',cursor:'pointer'}}>
-                 <FaUserCog size={24} color='black' />
-                 <p style={{color:'black',marginLeft:'12px',fontWeight:'bold'}}>My Profile</p>
+                 <FaUserCog size={18} color='black' style={{ fontWeight: 'normal' }} />
+                 <p className='sharpened-text' style={{color:'black',marginLeft:'12px',fontSize:'14px',fontWeight:600}}>My Profile</p>
                </div>
                <div onClick={() => logout()} style={{display:'flex',cursor:'pointer'}}>
-                 <FaSignOutAlt size={24} color='black' />
-                 <p style={{color:'black',marginLeft:'12px',fontWeight:'bold'}}>Logout</p>
+                 <FaSignOutAlt size={18} color='black' style={{ fontWeight: 'normal' }} />
+                 <p className='sharpened-text' style={{color:'black',marginLeft:'12px',fontSize:'14px',fontWeight:600}}>Logout</p>
                </div>
                </div>
            </div> : null

@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+  sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,12 +43,59 @@ code {
   background-color: #031832;
   border-color: #031832;
 }
+.th-bg {
+  color: white;
+  background-color: #031832;
+  border-color: #031832;
+}
+.react-icons .fa-user-cog {
+  font-weight: normal;
+}
 .table td, .table th {
   padding: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
   font-size: 13px;
   font-weight: 500;
+}
+.sharpened-text {
+  text-rendering: optimizeLegibility;
+}
+.sharpened-text {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  font-smooth: never;
+}
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.pagination-container button {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 2px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination-container button:hover {
+  background-color: #f5f5f5;
+}
+
+.pagination-container button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+.custom-select {
+  width: 200px; /* Adjust the width as needed */
+  height: 200px; /* Adjust the height as needed */
+  /* Add any other desired styles */
 }
 .item {
   margin-top: 20px;
@@ -417,8 +464,8 @@ padding-right:10px
   cursor: pointer;
 }
 .sender-you {
-  background-color: #4caf50;
-  color: white;
+  background-color: #e3fbe4;
+  color: black;
   align-self: flex-end;
 }
 
