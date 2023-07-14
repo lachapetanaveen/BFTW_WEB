@@ -13,7 +13,8 @@ const customStyles = {
       borderRadius: '4px',
       minHeight: '10px',
       boxShadow: 'none',
-      width:'180px',
+      width:'160px',
+      // height:'0px',
       marginLeft:'20px'
     }),
     option: (provided, state) => ({
@@ -100,7 +101,7 @@ const paginatedData = daaat.slice(startIndex, endIndex);
         <div className="m-auto">
 
         
-            <div style={{marginTop:'20px'}}>
+            <div style={{marginTop:'60px'}}>
              
                 <div  className="table-box table-responsive">
                 
@@ -111,7 +112,7 @@ const paginatedData = daaat.slice(startIndex, endIndex);
                                 {/* <th style={{fontWeight:700,}}>No.</th> */}
                                 <th style={{fontWeight:700,textAlign:'center'}}>Name </th>
                                 <th style={{fontWeight:700,textAlign:'center'}}>Email</th>
-                                <th style={{fontWeight:700,display:'flex',alignItems:'center',justifyContent:'center'}}>Interest <Select 
+                                <th style={{fontWeight:700,display:'flex',alignItems:'center',justifyContent:'end'}}><span style={{marginRight:'60px'}}>Interest</span> <Select 
                                     isMulti={true}
                                     styles={customStyles}
                                     onMenuClose={(value) => filterinterest(value)}
