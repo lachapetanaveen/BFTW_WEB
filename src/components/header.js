@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomSidebar from "./customsidebar";
 
+
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const [email,setEmail] = React.useState('');
@@ -75,7 +76,9 @@ export default function Header() {
     localStorage.removeItem('localdata');
     navigate('/home')
   }
-
+const sendmyprofile = () => {
+  navigate('/myprofile')
+}
 return (
     <>
    
@@ -103,7 +106,7 @@ return (
           {isDropdownOpen ? 
                <div  style={{position:'absolute',backgroundColor:'white',right:20,boxShadow:'0 2px 5px rgba(0, 0, 0, 0.2)',top:60,borderRadius:'5px'}}>
                <div style={{padding:'10px'}}>
-               <div style={{display:'flex',cursor:'pointer'}}>
+               <div onClick={() => sendmyprofile()} style={{display:'flex',cursor:'pointer'}}>
                  <FaUserCog size={18} color='black' style={{ fontWeight: 'normal' }} />
                  <p className='sharpened-text' style={{color:'black',marginLeft:'12px',fontSize:'14px',fontWeight:600}}>My Profile</p>
                </div>

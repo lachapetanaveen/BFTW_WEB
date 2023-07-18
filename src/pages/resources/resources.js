@@ -27,10 +27,14 @@ const Resources= () => {
   <div class="m-auto">
 
       
- 
+  <div className='profile-box' style={{marginTop:'60px',}}>
+      <div style={{padding:'10px',textAlign:'center'}} className='th-bg'>
+          <h4>Resources</h4>
+      </div>
+   <div style={{padding:'20px'}}>
 
 <div className="mb-4">
-      <h4 style={{marginTop:'20px',textAlign:'center'}}>Interests</h4>
+      <h6 style={{marginTop:'20px'}}>Choose Interests : </h6>
    
    <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
       <div style={{display:'flex'}}>
@@ -98,6 +102,7 @@ const Resources= () => {
       Upload Details
     </Button>
 </div>
+</div></div>
 </div>
 
 <div>
