@@ -1,6 +1,5 @@
 import React, { Component,useEffect } from 'react';
 import { Outlet, Navigate, Route, Routes } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import Dashboard from '../pages/allusers/allusers';
 import MyProfile from '../pages/myprofile/myprofile';
 import Resources from '../pages/resources/resources';

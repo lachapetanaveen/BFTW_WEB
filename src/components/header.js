@@ -52,7 +52,7 @@ export default function Header() {
       toast.error('Enter Email')
     }else if(!password){
       toast.error('Enter Password')
-    }else if(email !== 'naveen@olivetech.net' || password !== '123456'){
+    }else if(email !== 'admin@olivetech.net' || password !== '123456'){
       toast.error('Invalid Email or Password')
     }else{
       try {
