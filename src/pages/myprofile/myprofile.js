@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 const MyProfile = () => {
   
-    const [email,setEmail] = React.useState('');
+    const [email,setEmail] = useState('');
   const [firstname,setFirstname] = useState('');
   const [lastname,setLastname] = useState('');
   const [mobnumber,setMobnumber] =useState('');
@@ -16,7 +16,6 @@ const MyProfile = () => {
     getemail();
   },[])
 const getemail = async() => {
-  console.log('calling....');
   const prodata = await localStorage.getItem('prodata')
   const det = await localStorage.getItem('localdata');
   console.log(JSON.parse(det),'locdet');
@@ -35,6 +34,8 @@ const updateprofile =async() => {
     toast.error('Enter Last Name')
   }else if(!mobnumber){
     toast.error('Enter Mobile Number')
+  }else if(mobnumber.length !== 10){
+    toast.error('Invalid Mobile Number')
   }else {
     const obj ={
       email:email,
@@ -43,34 +44,35 @@ const updateprofile =async() => {
       mobilenumber:mobnumber
     }
     const dert = await localStorage.setItem('profiledata',obj)
+    setEmail('');
+    setMobnumber('');
+    setFirstname('');
+    setLastname('');
     toast.success('Profile Updated SuccessFully')
   }
 }
-  console.log(email,'email');
     return ( 
+      <div className='app_container'>
+      <Header />
+ <div >
+
+<div className="content" style={{marginLeft:'160px',padding:'20px',paddingTop:'8px'}}>
+  
+ 
+
+
+ <div className="m-auto">
+
+ 
+     <div className='profile-box' style={{marginTop:'60px',}}>
+      <div style={{padding:'10px',textAlign:'center'}} className='th-bg'>
+          <h4>Update Profile</h4>
+      </div>
+   <div style={{padding:'20px'}}>
+    <div  className='row'>
+        <div className='col-md-6'>
         <div>
-        <Header />
-   <Sidebar  />
-   <div class="maincont">
-    
-      
-       
-<div style={{marginLeft:'40px'}}>
-    
-   
-  
-  
-   <div class="row m-auto">
-
-      
-      {/* <h1 style={{fontSize:'20px',backgroundColor:'lightblue'}}>Welcome!!🙏to the My Profile</h1> */}
-
-      
-       
-   </div>
-   <div style={{marginTop:'26px',width: '50%'}}>
-                <div>
-                <label className="text-sm">first Name</label>
+                <label className="text-sm">First Name</label>
                       <input
                         type="text"
                         placeholder='Enter First Name'
@@ -79,12 +81,73 @@ const updateprofile =async() => {
                         value={firstname}
                         contentEditable={true}
                         onChange={(e) => setFirstname(e.target.value)}
-                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
+                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5,padding:8}}
                       
                       />
                 </div>
+        </div>
+        <div className='col-md-6'>
+        <div>
+                <label className="text-sm">Last Name</label>
+                      <input
+                        type="text"
+                        placeholder='Enter Last Name'
+                        aria-label="Last name"
+                        id="last_name"
+                        value={lastname}
+                        contentEditable={true}
+                        onChange={(e) => setLastname(e.target.value)}
+                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5,padding:8}}
                       
-                      <div style={{marginTop:'50px',position:'fixed',top:'110px',width:'20%',right:'500px',}}>
+                      />
+                </div>
+        </div>
+    </div>
+    <div style={{marginTop:'20px'}} className='row'>
+        <div className='col-md-6'>
+        <div>
+                <label className="text-sm">Email</label>
+                      <input
+                        type="text"
+                        placeholder='Enter Email'
+                        aria-label="Email"
+                        id="email"
+                        value={email}
+                        contentEditable={false}
+                        disabled
+                        // onChange={(e) => setFirstname(e.target.value)}
+                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5,padding:8}}
+                      
+                      />
+                </div>
+        </div>
+        <div className='col-md-6'>
+        <div>
+                <label className="text-sm">Mobile Number</label>
+                      <input
+                        type="text"
+                        placeholder='Enter Mobile Number'
+                        aria-label="Mobile Number"
+                        id="mobile_number"
+                        value={mobnumber}
+                        contentEditable={true}
+                        onChange={(e) => setMobnumber(e.target.value)}
+                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5,padding:8}}
+                      
+                      />
+                </div>
+        </div>
+    </div>
+    <div style={{marginTop:'20px'}}>
+            <button onClick={() => updateprofile()}  className="btn btn-primary float-right">
+              Update Profile
+            </button> 
+            
+            <div className="clearfix"></div>
+               
+          </div>
+                      
+                      {/* <div style={{marginTop:'50px',position:'fixed',top:'110px',width:'20%',right:'500px',}}>
                       <label className="text-sm">Last Name</label>
                       <input 
                         type="text"
@@ -148,13 +211,16 @@ const updateprofile =async() => {
             
                
           </div>
-                      </div>
+                      </div> */}
                       
                     </div>
 </div>
 
 {/* <Footer /> */}
 </div>
+</div>
+</div>
+<Footer />
 </div>
      );
 }

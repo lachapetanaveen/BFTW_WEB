@@ -91,16 +91,12 @@ const paginatedData = daaat.slice(startIndex, endIndex);
     return (
         <div className='app_container'>
              <Header />
-        <div >
+        <div>
   
     <div className="content" style={{marginLeft:'160px',padding:'20px',paddingTop:'8px'}}>
-         
-        
-       
-       
+      
         <div className="m-auto">
 
-        
             <div style={{marginTop:'60px'}}>
              
                 <div  className="table-box table-responsive">

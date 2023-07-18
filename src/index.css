@@ -38,6 +38,13 @@ code {
 .table-box {
   box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
 }
+.profile-box {
+  /* padding:20px; */
+  /* padding-left:20px;
+  padding-right:20px;
+  padding-bottom: 20px; */
+  box-shadow: 2px 2px 4px 4px rgba(0, 0, 0, 0.2);
+}
 .table .thead-light th {
   color: white;
   background-color: #031832;
@@ -151,7 +158,7 @@ section {
 .content {
   flex-grow: 1;
   margin-top: 74px;
-  margin-bottom: 100px; /* Adjust this value based on the footer height */
+  margin-bottom: 200px; /* Adjust this value based on the footer height */
   overflow-y: auto;
 }
 .footer{
@@ -299,6 +306,7 @@ input[type=file]::file-selector-button:hover {
 }
 .btn-primary {
   background: linear-gradient(to top, #f16000, #f17601,#f38501) !important;
+  border: none !important;
 }
 .btn-danger {
   background: linear-gradient(to top, #f16000, #f17601,#f38501) !important;
