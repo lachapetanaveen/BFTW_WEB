@@ -3,7 +3,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Button from "@mui/material/Button";
 import axios from 'axios';
-import constants from '../../constants/constants'
+import {Interests} from '../../constants/constants'
 const Resources = () => {
   const [files, setFiles] = useState([]);
   const [interest, setInterest] = useState([]);
@@ -74,7 +74,7 @@ const Resources = () => {
                     <h6 style={{ marginTop: '20px' }}>Choose Interests : </h6>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                     {constants.Interests.map((item,index) => {
+                     {Interests.map((item,index) => {
                       return(
                         <div style={{ display: 'flex',marginLeft: '16px' }}>
                         <input checked={interest.includes(item)} onChange={() => handleselect(item)} style={{ marginRight: '6px' }} type="checkbox" />
