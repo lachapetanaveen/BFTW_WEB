@@ -9,13 +9,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomSidebar from "./customsidebar";
+import { loginAuth } from '../services/authService';
 
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
-  const [email,setEmail] = React.useState('');
-  const [password,setPassword] = React.useState('');
-  const [data,setData] = React.useState()
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [data, setData] = React.useState()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   let navigate = useNavigate()
@@ -23,13 +24,13 @@ export default function Header() {
   const handleClose = () => setOpen(false);
   React.useEffect(() => {
     getdata();
-  },[])
-  const getdata = async() => {
+  }, [])
+  const getdata = async () => {
     const dert = await localStorage.getItem('localdata');
-    if(dert){
+    if (dert) {
       const derty = JSON.parse(dert)
-    
-    setData(derty)
+
+      setData(derty)
     }
   }
   const handleDropdownToggle = () => {
@@ -47,101 +48,105 @@ export default function Header() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  const submitdata = async() => {
-    if(!email){
-      toast.error('Enter Email')
-    }else if(!password){
-      toast.error('Enter Password')
-    }else if(email !== 'admin@olivetech.net' || password !== '123456'){
-      toast.error('Invalid Email or Password')
-    }else{
+  const submitdata = async () => {
+    if (!email) {
+      toast.error('Enter Email');
+    } else if (!password) {
+      toast.error('Enter Password');
+    } else {
       try {
-        const obj ={
-          email:email,
-          password:password
+        const obj = {
+          email: email,
+          password_hash: password
+        };
+        const logindata = await loginAuth(obj);
+        if (logindata && logindata.token) {
+          const data = JSON.stringify(logindata); // Convert to JSON string
+          localStorage.setItem('localdata', data);
+          // Assuming setData is defined properly to set the state with the login data
+          setData(logindata);
+          toast.success('Login Successfully');
+          navigate('/AllUsers');
+          handleClose();
+        } else {
+          toast.error('Check email or password');
         }
-        const det = JSON.stringify(obj)
-        const dataa = await localStorage.setItem('localdata',det);
-         setData(obj)
-         toast.success('Login SuccessFully')
-        navigate('/AllUsers')
-        handleClose()
       } catch (ex) {
-        
+        toast.error('Something went wrong');
       }
     }
-     
-  }
+  };
+
   const logout = () => {
     localStorage.removeItem('localdata');
     navigate('/home')
   }
-const sendmyprofile = () => {
-  navigate('/myprofile')
-}
-return (
+  const sendmyprofile = () => {
+    navigate('/myprofile')
+  }
+  return (
     <>
-   
-<div  ref={dropdownRef}>
-  <div>
-   
-    {data && (data !== null || data !== undefined) ?
-    <CustomSidebar />
- : null
-    }
-  </div>
-  <div>
-  <nav>
-      <div className="navbar-container">
-       
-         <div className="logo">
-        
-          <img className="logo_img"  src={require('../assets/BFTW.png')} />
-        </div>
-        
+
+      <div ref={dropdownRef}>
+        <div>
+
           {data && (data !== null || data !== undefined) ?
-           <ul  className="nav-links">
-             <div><FaBell size={25} color="white" /></div>
-           <div style={{cursor:'pointer',marginLeft:'28px'}} onClick={() =>handleDropdownToggle()}><FaUserCircle size={25} color="white" /></div>
-          {isDropdownOpen ? 
-               <div  style={{position:'absolute',backgroundColor:'white',right:20,boxShadow:'0 2px 5px rgba(0, 0, 0, 0.2)',top:60,borderRadius:'5px'}}>
-               <div style={{padding:'10px'}}>
-               <div onClick={() => sendmyprofile()} style={{display:'flex',cursor:'pointer'}}>
-                 <FaUserCog size={18} color='black' style={{ fontWeight: 'normal' }} />
-                 <p className='sharpened-text' style={{color:'black',marginLeft:'12px',fontSize:'14px',fontWeight:600}}>My Profile</p>
-               </div>
-               <div onClick={() => logout()} style={{display:'flex',cursor:'pointer'}}>
-                 <FaSignOutAlt size={18} color='black' style={{ fontWeight: 'normal' }} />
-                 <p className='sharpened-text' style={{color:'black',marginLeft:'12px',fontSize:'14px',fontWeight:600}}>Logout</p>
-               </div>
-               </div>
-           </div> : null
+            <CustomSidebar />
+            : null
           }
-         
-           </ul>
-          
-          :
-          <ul className="nav-links">
-          <li><Link style={{color:'white'}}to={'/home'}>Home</Link></li>
-          <li><Link style={{color:'white'}} to={'/about'}>About</Link></li>
-          <li><Link style={{color:'white'}} to={'/contact'}>Contact</Link></li>
-          <button  onClick={() => handleOpen()} className="btn btn-sm btn-white"> Login
-        </button>
-        </ul>
-          }
+        </div>
+        <div>
+          <nav>
+            <div className="navbar-container">
 
+              <div className="logo">
+
+                <img className="logo_img" src={require('../assets/BFTW.png')} />
+              </div>
+
+              {data && (data !== null || data !== undefined) ?
+                <ul className="nav-links">
+                  <div><FaBell size={25} color="white" /></div>
+                  <div style={{ cursor: 'pointer', marginLeft: '28px' }} onClick={() => handleDropdownToggle()}><FaUserCircle size={25} color="white" /></div>
+                  {isDropdownOpen ?
+                    <div style={{ position: 'absolute', backgroundColor: 'white', right: 20, boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)', top: 60, borderRadius: '5px' }}>
+                      <div style={{ padding: '10px' }}>
+                        <div onClick={() => sendmyprofile()} style={{ display: 'flex', cursor: 'pointer' }}>
+                          <FaUserCog size={18} color='black' style={{ fontWeight: 'normal' }} />
+                          <p className='sharpened-text' style={{ color: 'black', marginLeft: '12px', fontSize: '14px', fontWeight: 600 }}>My Profile</p>
+                        </div>
+                        <div onClick={() => logout()} style={{ display: 'flex', cursor: 'pointer' }}>
+                          <FaSignOutAlt size={18} color='black' style={{ fontWeight: 'normal' }} />
+                          <p className='sharpened-text' style={{ color: 'black', marginLeft: '12px', fontSize: '14px', fontWeight: 600 }}>Logout</p>
+                        </div>
+                      </div>
+                    </div> : null
+                  }
+
+                </ul>
+
+                :
+                <ul className="nav-links">
+                  <li><Link style={{ color: 'white' }} to={'/home'}>Home</Link></li>
+                  <li><Link style={{ color: 'white' }} to={'/about'}>About</Link></li>
+                  <li><Link style={{ color: 'white' }} to={'/contact'}>Contact</Link></li>
+                  <button onClick={() => handleOpen()} className="btn btn-sm btn-white"> Login
+                  </button>
+                </ul>
+              }
+
+            </div>
+          </nav>
+          {/* {isDropdownOpen && ( */}
+
+          {/* )} */}
+        </div>
       </div>
-    </nav>
-    {/* {isDropdownOpen && ( */}
-       
-      {/* )} */}
-  </div>
-</div>
 
 
-<Modal
-       
-        style={{width:'80%',borderRadius:10}}
+      <Modal
+
+        style={{ width: '80%', borderRadius: 10 }}
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -155,82 +160,82 @@ return (
         }}
       >
         <Fade in={open}>
-          <Box style={{width:'50%',position:'absolute',top:'30%',backgroundColor:'white',left:'40%',borderRadius:10}} >
-         
+          <Box style={{ width: '50%', position: 'absolute', top: '30%', backgroundColor: 'white', left: '40%', borderRadius: 10 }} >
+
             <div className="modal_header">
-           
+
               <div className="modal_logo">
-              <img style={{width:'25%'}}src={require('../assets/bftw_new.png')} />
+                <img style={{ width: '25%' }} src={require('../assets/bftw_new.png')} />
               </div>
               <div onClick={handleClose} className="modal_close">
-              <FaTimes size={24} color="red" />
+                <FaTimes size={24} color="red" />
               </div>
             </div>
-            
+
             <div className="p-4">
               <div>
-              <div style={{marginTop:'8px',}}>
-                <div>
-                <label className="text-sm">Email</label>
-                      <input
-                        type="text"
-                        aria-label="First name"
-                        id="first_name"
-                        contentEditable={true}
-                        onChange={(e) => setEmail(e.target.value)}
-                    style={{position:'relative',display:'block',borderRadius:'10px',width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
-                      
-                      />
+                <div style={{ marginTop: '8px', }}>
+                  <div>
+                    <label className="text-sm">Email</label>
+                    <input
+                      type="text"
+                      aria-label="First name"
+                      id="first_name"
+                      contentEditable={true}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5 }}
+
+                    />
+                  </div>
+
+                  <div style={{ marginTop: '20px' }}>
+                    <label className="text-sm">Password</label>
+                    <input
+                      type="password"
+                      aria-label="First name"
+                      id="first_name"
+                      contentEditable={true}
+                      onChange={(e) => setPassword(e.target.value)}
+                      style={{ position: 'relative', display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5 }}
+                    />
+                  </div>
+
+
+
                 </div>
-                      
-                      <div style={{marginTop:'20px'}}>
-                      <label className="text-sm">Password</label>
-                      <input
-                        type="password"
-                        aria-label="First name"
-                        id="first_name"
-                        contentEditable={true}
-                        onChange={(e) => setPassword(e.target.value)}
-                    style={{position:'relative',display:'block',borderRadius:10,width:'100%',height:'40px',borderColor:'gray',borderWidth:0.5}}
-                      />
-                      </div>
-                      
-                       
-                      
-                    </div>
-                    <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:20}}>
-                      <div>
-                      <Button
-                  onClick={() => submitdata()}
-                  className="btn btn-lg btn-primary"
-                  variant="contained"
-                >
-                  Submit
-                </Button>
-                      </div>
-                      <div style={{marginLeft:'20px'}}>
-                      <Button
-                  onClick={() => handleClose()}
-                  className="btn btn-lg btn-danger"
-                  variant="contained"
-                >
-                  Reset
-                </Button>
-                      </div>
-                    </div>
-               
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 20 }}>
+                  <div>
+                    <Button
+                      onClick={() => submitdata()}
+                      className="btn btn-lg btn-primary"
+                      variant="contained"
+                    >
+                      Submit
+                    </Button>
+                  </div>
+                  <div style={{ marginLeft: '20px' }}>
+                    <Button
+                      onClick={() => handleClose()}
+                      className="btn btn-lg btn-danger"
+                      variant="contained"
+                    >
+                      Reset
+                    </Button>
+                  </div>
+                </div>
+
               </div>
             </div>
             <div className="flex !items-center !justify-center">
-              
+
               <div>
-                
+
               </div>
-             
+
             </div>
           </Box>
         </Fade>
       </Modal>
-</>
-);
+    </>
+  );
 }
