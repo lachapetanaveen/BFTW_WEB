@@ -3,7 +3,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Button from "@mui/material/Button";
 import axios from 'axios';
-
+import {Interests} from '../../constants/constants'
 const Resources = () => {
   const [files, setFiles] = useState([]);
   const [interest, setInterest] = useState([]);
@@ -74,11 +74,16 @@ const Resources = () => {
                     <h6 style={{ marginTop: '20px' }}>Choose Interests : </h6>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <div style={{ display: 'flex' }}>
-                        <input checked={interest.includes('Baptism')} onChange={() => handleselect('Baptism')} style={{ marginRight: '6px' }} type="checkbox" />
-                        <label style={{ marginTop: '10px' }}>Baptism</label>
+                     {Interests.map((item,index) => {
+                      return(
+                        <div style={{ display: 'flex',marginLeft: '16px' }}>
+                        <input checked={interest.includes(item)} onChange={() => handleselect(item)} style={{ marginRight: '6px' }} type="checkbox" />
+                        <label style={{ marginTop: '10px' }}>{item}</label>
                       </div>
-                      <div style={{ display: 'flex', marginLeft: '16px' }}>
+                      )
+                     })}
+                      
+                      {/* <div style={{ display: 'flex', marginLeft: '16px' }}>
                         <input checked={interest.includes('Counselling')} onChange={() => handleselect('Counselling')} style={{ marginRight: '6px' }} type="checkbox" />
                         <label style={{ marginTop: '10px' }}>Counselling</label>
                       </div>
@@ -89,7 +94,7 @@ const Resources = () => {
                       <div style={{ display: 'flex', marginLeft: '16px' }}>
                         <input checked={interest.includes('More Scripture')} onChange={() => handleselect('More Scripture')} style={{ marginRight: '6px' }} type="checkbox" />
                         <label style={{ marginTop: '10px' }}>More Scripture</label>
-                      </div>
+                      </div> */}
                     </div>
 
                   </div>
