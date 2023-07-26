@@ -13,7 +13,7 @@ useEffect(() => {
   getdata()
 },[])
 const getdata = async() => {
-  const dert = await localStorage.getItem('localdata');
+  const dert = await localStorage.getItem('logindata');
   if(dert){
     navigate('/allusers')
   }

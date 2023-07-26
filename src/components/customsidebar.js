@@ -1,7 +1,7 @@
-import { Book, BookOnlineOutlined, BookOnlineRounded } from '@mui/icons-material';
-import React, { Component,useState } from 'react';
+import { BookOnlineRounded } from '@mui/icons-material';
+import React from 'react';
 import { FaExternalLinkSquareAlt, FaUsers } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CustomSidebar = () => {
    const location = useLocation();

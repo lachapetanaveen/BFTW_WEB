@@ -1,21 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import { FaBell, FaSignOutAlt, FaTimes, FaUserCircle, FaUserCog } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CustomSidebar from "./customsidebar";
-import { loginAuth } from '../services/authService';
+import Login from '../pages/auth/login';
 
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+
   const [data, setData] = React.useState()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -26,7 +23,7 @@ export default function Header() {
     getdata();
   }, [])
   const getdata = async () => {
-    const dert = await localStorage.getItem('localdata');
+    const dert = await localStorage.getItem('token');
     if (dert) {
       const derty = JSON.parse(dert)
 
@@ -48,37 +45,13 @@ export default function Header() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-  const submitdata = async () => {
-    if (!email) {
-      toast.error('Enter Email');
-    } else if (!password) {
-      toast.error('Enter Password');
-    } else {
-      try {
-        const obj = {
-          email: email,
-          password_hash: password
-        };
-        const logindata = await loginAuth(obj);
-        if (logindata && logindata.token) {
-          const data = JSON.stringify(logindata); // Convert to JSON string
-          localStorage.setItem('localdata', data);
-          // Assuming setData is defined properly to set the state with the login data
-          setData(logindata);
-          toast.success('Login Successfully');
-          navigate('/AllUsers');
-          handleClose();
-        } else {
-          toast.error('Check email or password');
-        }
-      } catch (ex) {
-        toast.error('Something went wrong');
-      }
-    }
-  };
+  
 
-  const logout = () => {
-    localStorage.removeItem('localdata');
+  const logout = async() => {
+    await localStorage.removeItem('token');
+    await localStorage.removeItem('logindata');
+    await localStorage.removeItem('profiledata');
+    await localStorage.setItem('loggedIn',false);
     navigate('/home')
   }
   const sendmyprofile = () => {
@@ -101,7 +74,7 @@ export default function Header() {
 
               <div className="logo">
 
-                <img className="logo_img" src={require('../assets/BFTW.png')} />
+                <img className="logo_img" src={require('../assets/BFTW.png')} alt="logo" />
               </div>
 
               {data && (data !== null || data !== undefined) ?
@@ -165,7 +138,7 @@ export default function Header() {
             <div className="modal_header">
 
               <div className="modal_logo">
-                <img style={{ width: '25%' }} src={require('../assets/bftw_new.png')} />
+                <img style={{ width: '25%' }} src={require('../assets/bftw_new.png')} alt="logo" />
               </div>
               <div onClick={handleClose} className="modal_close">
                 <FaTimes size={24} color="red" />
@@ -173,58 +146,8 @@ export default function Header() {
             </div>
 
             <div className="p-4">
-              <div>
-                <div style={{ marginTop: '8px', }}>
-                  <div>
-                    <label className="text-sm">Email</label>
-                    <input
-                      type="text"
-                      aria-label="First name"
-                      id="first_name"
-                      contentEditable={true}
-                      onChange={(e) => setEmail(e.target.value)}
-                      style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5 }}
-
-                    />
-                  </div>
-
-                  <div style={{ marginTop: '20px' }}>
-                    <label className="text-sm">Password</label>
-                    <input
-                      type="password"
-                      aria-label="First name"
-                      id="first_name"
-                      contentEditable={true}
-                      onChange={(e) => setPassword(e.target.value)}
-                      style={{ position: 'relative', display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5 }}
-                    />
-                  </div>
-
-
-
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 20 }}>
-                  <div>
-                    <Button
-                      onClick={() => submitdata()}
-                      className="btn btn-lg btn-primary"
-                      variant="contained"
-                    >
-                      Submit
-                    </Button>
-                  </div>
-                  <div style={{ marginLeft: '20px' }}>
-                    <Button
-                      onClick={() => handleClose()}
-                      className="btn btn-lg btn-danger"
-                      variant="contained"
-                    >
-                      Reset
-                    </Button>
-                  </div>
-                </div>
-
-              </div>
+              <Login />
+            
             </div>
             <div className="flex !items-center !justify-center">
 

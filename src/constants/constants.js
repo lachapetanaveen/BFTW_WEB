@@ -1,4 +1,4 @@
 
-  export const  Interests = ['Baptism','Counselling','Connect with a Church','More Scripture']
+  export const  Interests = ['Baptism','Counselling','cwc','ms']
 
 // export default {Interests};

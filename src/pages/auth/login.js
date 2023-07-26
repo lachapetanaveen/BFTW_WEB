@@ -1,28 +1,39 @@
 import React, { Component, useState } from "react";
-import './assets/img1.jpg'
+import { toast } from 'react-toastify';
+// import './assets/img1.jpg'
 import { loginAuth } from '../../services/authService'
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleSubmit = async (e) => {
+    if (!email) {
+      toast.error('Enter Email');
+    } else if (!password) {
+      toast.error('Enter Password');
+    } else {
     try {
-      const logindata = await loginAuth({ email, password })
+    
+      const logindata = await loginAuth({ email, password_hash:password })
       if (logindata) {
-        alert("login successful");
-        localStorage.setItem('logindata',)
-        window.localStorage.setItem("token", data.data);
-        window.localStorage.setItem("loggedIn", true);
-        window.location.href = "./userDetails";
+        // alert("login successful");
+        await localStorage.setItem('logindata',JSON.stringify(logindata))
+        await localStorage.setItem("token", JSON.stringify(logindata.token));
+      await localStorage.setItem("loggedIn", true);
+      navigate('/AllUsers')
+        // window.location.href = "./userDetails";
       }
     } catch (error) {
       alert("Something error");
+    }
     }
   }
 
   return (
 
-    <div src={{}} className="auth-wrapper">
+    <div  className="auth-wrapper">
       <div className="auth-inner">
 
         <h3>Sign In</h3>
