@@ -18,7 +18,7 @@ const MyProfile = () => {
 
   const getuserDetails = async () => {
     try {
-      const localprofiledata = localStorage.getItem('profiledata');
+      const localprofiledata = await localStorage.getItem('profiledata');
       const parsedLocalprofiledata = JSON.parse(localprofiledata)
       if (parsedLocalprofiledata && parsedLocalprofiledata.email) {
         setUser(parsedLocalprofiledata)
@@ -26,16 +26,19 @@ const MyProfile = () => {
         setEmail(parsedLocalprofiledata.email)
         setMobnumber(parsedLocalprofiledata.mobile)
       } else {
-        const localdata = localStorage.getItem('localdata');
+        const localdata = await localStorage.getItem('logindata');
+        console.log(localdata,'localdata');
         const parsedData = JSON.parse(localdata)
+        console.log(parsedData,'parsedData');
         const getuserDetails = await getUserProfile(parsedData._id)
+        console.log(getuserDetails,'getuserDetails');
         if (getuserDetails) {
           setUser(parsedData)
           setName(getuserDetails.full_name)
           setEmail(getuserDetails.email)
           setMobnumber(getuserDetails.mobile)
           const data = JSON.stringify(getuserDetails); // Convert to JSON string
-          const savedLocal = localStorage.setItem('profiledata', data)
+          const savedLocal = await localStorage.setItem('profiledata', data)
         } else {
           toast.error('Please check users ')
         }
@@ -61,7 +64,7 @@ const MyProfile = () => {
       }
       const updatedData = await updateProfile(userDetails._id, obj)
       const data = JSON.stringify(updatedData.user); // Convert to JSON string
-      const savedLocal = localStorage.setItem('profiledata', data)
+      const savedLocal = await localStorage.setItem('profiledata', data)
       await getuserDetails()
       toast.success('Profile Updated SuccessFully')
     }
@@ -85,9 +88,9 @@ const MyProfile = () => {
               </div>
               <div style={{ padding: '20px' }}>
                 <div className='row'>
-                  <div className='col-md-6'>
+                  <div className='col-md-12'>
                     <div>
-                      <label className="text-sm">First Name</label>
+                      <label className="text-sm">Full Name</label>
                       <input
                         type="text"
                         placeholder='Enter First Name'
@@ -101,7 +104,7 @@ const MyProfile = () => {
                       />
                     </div>
                   </div>
-                  <div className='col-md-6'>
+                  {/* <div className='col-md-6'>
                     <div>
                       <label className="text-sm">Last Name</label>
                       <input
@@ -116,10 +119,10 @@ const MyProfile = () => {
 
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div style={{ marginTop: '20px' }} className='row'>
-                  <div className='col-md-6'>
+                  <div className='col-md-12'>
                     <div>
                       <label className="text-sm">Email</label>
                       <input
@@ -136,7 +139,10 @@ const MyProfile = () => {
                       />
                     </div>
                   </div>
-                  <div className='col-md-6'>
+                 
+                </div>
+                <div style={{ marginTop: '20px' }} className='row'>
+                <div className='col-md-12'>
                     <div>
                       <label className="text-sm">Mobile Number</label>
                       <input
@@ -152,7 +158,7 @@ const MyProfile = () => {
                       />
                     </div>
                   </div>
-                </div>
+                  </div>
                 <div style={{ marginTop: '20px' }}>
                   <button onClick={() => updateprofile()} className="btn btn-primary float-right">
                     Update Profile

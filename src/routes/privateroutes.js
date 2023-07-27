@@ -26,7 +26,7 @@ const PrivateMiddleware = () => {
    
     useEffect(() => {
       const checkAuthentication = async () => {
-        const locdata = await localStorage.getItem('localdata');
+        const locdata = await localStorage.getItem('token');
         // Check your authentication logic here, for example, verifying cookies
         if (!locdata) {
           // Redirect to login if not authenticated

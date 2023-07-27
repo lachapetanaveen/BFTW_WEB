@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-//  const base_URL = "https://apibftw.olivetech.com/api/v1" // For PROD & DEV
-const base_URL = "http://localhost:5000/api/v1" // FOR LOCAL SERVER
+ const base_URL = "https://apibftw.olivetech.com/api/v1" // For PROD & DEV
+// const base_URL = "http://localhost:5000/api/v1" // FOR LOCAL SERVER
 
 const axiosInstance = axios.create({
   baseURL: base_URL,
 });
 
 axiosInstance.interceptors.request.use(async (config) => {
-  const storedData = await localStorage.getItem('localdata');
+  const storedData = await localStorage.getItem('logindata');
   const userData = storedData ? JSON.parse(storedData) : null;
   if (userData?.token) {
     config.headers['authorization'] = 'Bearer ' + userData.token;
