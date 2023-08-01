@@ -12,7 +12,6 @@ import Login from '../pages/auth/login';
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
-
   const [data, setData] = React.useState()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -26,7 +25,6 @@ export default function Header() {
     const dert = await localStorage.getItem('token');
     if (dert) {
       const derty = JSON.parse(dert)
-
       setData(derty)
     }
   }
@@ -57,12 +55,14 @@ export default function Header() {
   const sendmyprofile = () => {
     navigate('/myprofile')
   }
+  const sendregister = () => {
+    navigate('/register')
+  }
   return (
     <>
 
       <div ref={dropdownRef}>
         <div>
-
           {data && (data !== null || data !== undefined) ?
             <CustomSidebar />
             : null
@@ -71,12 +71,12 @@ export default function Header() {
         <div>
           <nav>
             <div className="navbar-container">
-
               <div className="logo">
-
                 <img className="logo_img" src={require('../assets/BFTW.png')} alt="logo" />
               </div>
-
+              {/* <div>
+                <li style={{listStyle:'none',textDecorationLine:'underline',cursor:'pointer'}}><Link style={{ color: 'white' }} to={'/register'}>Click Here</Link></li>
+              </div> */}
               {data && (data !== null || data !== undefined) ?
                 <ul className="nav-links">
                   <div><FaBell size={25} color="white" /></div>
@@ -103,7 +103,10 @@ export default function Header() {
                   <li><Link style={{ color: 'white' }} to={'/home'}>Home</Link></li>
                   <li><Link style={{ color: 'white' }} to={'/about'}>About</Link></li>
                   <li><Link style={{ color: 'white' }} to={'/contact'}>Contact</Link></li>
+                  
                   <button onClick={() => handleOpen()} className="btn btn-sm btn-white"> Login
+                  </button>
+                  <button onClick={() => sendregister()} className="btn btn-sm btn-white"> Register
                   </button>
                 </ul>
               }
