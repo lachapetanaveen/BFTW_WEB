@@ -78,7 +78,7 @@ const Resources = () => {
                       return(
                         <div style={{ display: 'flex',marginLeft: '16px' }}>
                         <input checked={interest.includes(item)} onChange={() => handleselect(item)} style={{ marginRight: '6px' }} type="checkbox" />
-                        <label style={{ marginTop: '10px' }}>{item}</label>
+                        <label style={{ marginTop: '10px' }}>{item === 'cwc' ? 'Connect With Church' : item === 'ms' ? 'More Scripture' : item}</label>
                       </div>
                       )
                      })}
