@@ -27,18 +27,15 @@ const MyProfile = () => {
         setMobnumber(parsedLocalprofiledata.mobile)
       } else {
         const localdata = await localStorage.getItem('logindata');
-        console.log(localdata,'localdata');
         const parsedData = JSON.parse(localdata)
-        console.log(parsedData,'parsedData');
         const getuserDetails = await getUserProfile(parsedData._id)
-        console.log(getuserDetails,'getuserDetails');
         if (getuserDetails) {
           setUser(parsedData)
           setName(getuserDetails.full_name)
           setEmail(getuserDetails.email)
           setMobnumber(getuserDetails.mobile)
           const data = JSON.stringify(getuserDetails); // Convert to JSON string
-          const savedLocal = await localStorage.setItem('profiledata', data)
+          const savedLocal = localStorage.setItem('profiledata', data)
         } else {
           toast.error('Please check users ')
         }

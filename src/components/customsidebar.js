@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const CustomSidebar = () => {
    const location = useLocation();
    const navigate = useNavigate();
-   console.log(location.pathname,'location.pathname');
    const sendmenu = (path) => {
     navigate(path)
    }
