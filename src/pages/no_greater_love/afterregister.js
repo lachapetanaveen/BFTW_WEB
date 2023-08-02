@@ -1,105 +1,32 @@
 import React, { Component, useState } from 'react';
 import Header from '../../components/header';
+import questionArray from '../../components/questions.json'
 
 const AfterRegister = () => {
-    const [twoa, setTwoa] = useState('');
-    const [twob, setTwob] = useState('');
-    const [threea, setThreea] = useState('');
-    const [threeb, setThreeb] = useState('');
-    const [foura, setFoura] = useState('');
-    const [fivea, setFivea] = useState('');
-    const [fiveb, setFiveb] = useState('');
-    const [lastname, setLastName] = useState('');
-    const [fivebcomment, setFivebComment] = useState('');
-    const [sixa, setSixa] = useState('');
-    const [sevena, setSevena] = useState('');
-    const [eighta, setEighta] = useState('');
-    const [eightb, setEightb] = useState('');
-    const [ninea,setninea] = useState('');
-    const [nineaother,setNineaother] = useState('');
-    const [country, setCountry] = useState('');
-    const [statevalue, setStatevalue] = useState('');
-    const [city, setCity] = useState('');
-    const [zipcode, setZipcode] = useState('');
-    const [address, setAddress] = useState('');
+    const [answers, setAnswers] = useState({});
 
-    const handlesettoa = (value) => {
-        setTwoa(value)
-        setThreea('');
-        setThreeb('');
-        setFoura('');
-        setFivea('');
-        setFiveb('');
-        setFivebComment('');
-        setSixa('');
-        setSevena('');
-        setEighta('');
-        setEightb('');
-        
-    }
-    const handlesetthreea = (value) => {
-        setThreea(value)
-        setFivea('');
-        setFiveb('');
-        setFivebComment('');
-        setSixa('');
-        setSevena('');
-        setEighta('');
-        setEightb('');
-    }
-    const handlesetfoura = (value) => {
-        setFoura(value)
-        setFivea('');
-        setFiveb('');
-        setFivebComment('');
-        setSixa('');
-        setSevena('');
-        setEighta('');
-        setEightb('');
-    }
-    const handlesetfiveb = (value) => {
-        setFiveb(value);
-        setSixa('');
-        setSevena('');
-        setEighta('');
-        setEightb('');
-    }
-    const handlesetsixa = (value) => {
-        setSixa(value)
-        setSevena('');
-        setEighta('');
-        setEightb('');
-    }
-    const submit = () => {
-        const obj = {
-            twoa:twoa,
-            twob:twob,
-            threea:threea,
-            threeb:threeb,
-            foura:foura,
-            fivea:fivea,
-            fiveb:fiveb,
-            fivebcomment:fivebcomment,
-            sixa:sixa,
-            sevena:sevena,
-            eighta:eighta,
-            eightb:eightb,
-            ninea:ninea
-        }
-        for (const key in obj) {
-            const value = obj[key];
-            if (
-              value === null ||
-              value === undefined ||
-              value === '' ||
-              (Array.isArray(value) && value.length === 0) ||
-              (typeof value === 'object' && Object.keys(value).length === 0)
-            ) {
-              delete obj[key];
-            }
-          }
-          console.log(obj,'obj');
-    }
+    const handleAnswerChange = (questionId, answer) => {
+        setAnswers(prevAnswers => {
+            // Check if this question has conditions on others
+            const relatedQuestions = questionArray.filter(question =>
+                question.condtions && question.condtions.length > 0 && question.condtions.some(condition => condition.questionId === questionId)
+            );
+      
+            // If it does, remove related answers
+            const updatedAnswers = { ...prevAnswers };
+            relatedQuestions.forEach(relatedQuestion => {
+              delete updatedAnswers[relatedQuestion.id];
+            });
+      
+            // Update the answer for the current question
+            updatedAnswers[questionId] = answer;
+      
+            return updatedAnswers;
+          });
+      };
+ 
+   
+    console.log(answers,'answers');
     return (
         <>
             <div className='app_container'>
@@ -107,7 +34,83 @@ const AfterRegister = () => {
 
                 <Header />
                 <div className='container-fluid content'>
-                    <div style={{ marginTop: '20px', }}>
+                    {questionArray.map(question => {
+                        const {id,question:questionText,type,options,condtions,reqfields} = question;
+
+                        const conditionSatisfied = condtions && condtions.length > 0 && condtions.every(condition => {
+                            const {questionId,operator,value} = condition;
+                            return answers[questionId] === value
+                        })
+                        if (conditionSatisfied || condtions.length === 0) {
+                            return (
+                              <div key={id} className="question">
+                               <div style={{marginTop:'20px'}}>{questionText}</div>
+                                {type === 'radio' ? 
+                                    options.map(option => (
+                                        <label style={{marginTop:'10px'}} key={option}>
+                                          <input
+                                            type={type}
+                                            value={option}
+                                            checked={answers[id] === option}
+                                            style={{marginLeft:'12px',marginRight:'6px'}}
+                                            onChange={() => handleAnswerChange(id, option)}
+                                          />
+                                          {option.charAt(0).toUpperCase() + option.slice(1)}
+                                        </label>
+                                      )) : type === 'text'?
+                                      <input
+                                      type={type}
+                                      value={answers[id] || ''}
+                                      onChange={(e) => handleAnswerChange(id, e.target.value)}
+                                      style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8,marginTop:'10px' }}
+                                    />
+                                      :type === "link" ? 
+                                      <h6 style={{ textAlign: 'center', marginTop: '14px', cursor: 'pointer' }}><a style={{ textAlign: 'center', textDecoration: 'underline' }}>Please Click here to download or go to Play Store/App Store and download "No Greater Love"</a></h6>:null
+                                }
+                                {reqfields && reqfields.length > 0 ? 
+                                   reqfields.map(k => {
+                                    return(
+                                       <div>
+                                        {k.type === 'text' ? 
+                                            <div>
+                                                 <label className="text-csm">{k.label}</label>
+                                                 <input
+                                                 type={type}
+                                                 value={answers[k.key] || ''}
+                                                //  style={{marginLeft:'12px'}}
+                                                 onChange={(e) => handleAnswerChange(k.key, e.target.value)}
+                                                 style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                               />
+                                               </div>
+                                            :<div>
+                                            <label className="text-csm">{k.label}</label>
+                                            <select
+                                            type={type}
+                                            value={answers[k.key] || ''}
+                                            // style={{marginLeft:'12px'}}
+                                            onChange={(e) => handleAnswerChange(k.key, e.target.value)}
+                                            style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                          >
+                                            {k.refieldoptions.map(l => {
+                                                return(
+                                                    <option value={l}>{l}</option>
+                                                )
+                                            })}
+                                          </select>
+                                          </div>}
+                                       </div>
+                                            
+                                       
+                                     
+                                    )
+                                   })
+                                    :null
+                                }
+                              </div>
+                            );
+                          }
+                    })}
+                    {/* <div style={{ marginTop: '20px', }}>
                         <div className='row'>
                             <div className='col-md-6'>
                                 <div>
@@ -442,7 +445,7 @@ const AfterRegister = () => {
                                         Submit
                                     </button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>
