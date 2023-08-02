@@ -8,7 +8,7 @@ const Footer = () => {
     return ( 
 
 
-<footer class="footer-distributed footer items-center justify-content-center">
+<footer className="footer-distributed footer items-center justify-content-center">
 <div className='row'>
     <div className='col-md-4'>
         <img style={{width:'24%',float:'left'}} src={require('../assets/bftw_new.png')} alt='logo' />

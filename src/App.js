@@ -4,13 +4,13 @@ import AppRoutes from './routes/routes';
 
 
 function App() {
-return (
+    return (
 
-<>
-<AppRoutes />
-<ToastContainer />
-</>
-);
+        <>
+            <AppRoutes />
+            <ToastContainer />
+        </>
+    );
 }
 export default App;
 

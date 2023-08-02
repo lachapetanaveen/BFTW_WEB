@@ -33,7 +33,6 @@ const Resources = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(response, 'response');
     } catch (ex) {
 
     }
