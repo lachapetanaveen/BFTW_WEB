@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import Header from '../../components/header';
 import questionArray from '../../components/questions.json'
+import './afterregister.css';
 
 const AfterRegister = () => {
     const [answers, setAnswers] = useState({});
@@ -33,7 +34,11 @@ const AfterRegister = () => {
 
 
                 <Header />
-                <div className='container-fluid content'>
+                <div className='qa_container'>
+
+                </div>
+                <div className='container-fluid qacontent'>
+                
                     {questionArray.map(question => {
                         const {id,question:questionText,type,options,condtions,reqfields} = question;
 
@@ -43,9 +48,10 @@ const AfterRegister = () => {
                         })
                         if (conditionSatisfied || condtions.length === 0) {
                             return (
-                              <div key={id} className="question">
+                              <div key={id} className="card_question">
                                <div style={{marginTop:'20px'}}>{questionText}</div>
-                                {type === 'radio' ? 
+                               <div className='card_answer'>
+                               {type === 'radio' ? 
                                     options.map(option => (
                                         <label style={{marginTop:'10px'}} key={option}>
                                           <input
@@ -62,7 +68,7 @@ const AfterRegister = () => {
                                       type={type}
                                       value={answers[id] || ''}
                                       onChange={(e) => handleAnswerChange(id, e.target.value)}
-                                      style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8,marginTop:'10px' }}
+                                      style={{  display: 'block', borderRadius: '10px', width: '100%', height: '36px', borderColor: 'gray', borderWidth: 0.5, padding: 8,marginTop:'10px' }}
                                     />
                                       :type === "link" ? 
                                       <h6 style={{ textAlign: 'center', marginTop: '14px', cursor: 'pointer' }}><a style={{ textAlign: 'center', textDecoration: 'underline' }}>Please Click here to download or go to Play Store/App Store and download "No Greater Love"</a></h6>:null
@@ -79,7 +85,7 @@ const AfterRegister = () => {
                                                  value={answers[k.key] || ''}
                                                 //  style={{marginLeft:'12px'}}
                                                  onChange={(e) => handleAnswerChange(k.key, e.target.value)}
-                                                 style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                                 style={{  display: 'block', borderRadius: '10px', width: '100%', height: '36px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                                />
                                                </div>
                                             :<div>
@@ -89,7 +95,7 @@ const AfterRegister = () => {
                                             value={answers[k.key] || ''}
                                             // style={{marginLeft:'12px'}}
                                             onChange={(e) => handleAnswerChange(k.key, e.target.value)}
-                                            style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                            style={{  display: 'block', borderRadius: '10px', width: '100%', height: '36px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                           >
                                             {k.refieldoptions.map(l => {
                                                 return(
@@ -106,10 +112,18 @@ const AfterRegister = () => {
                                    })
                                     :null
                                 }
+                               </div>
+                                
                               </div>
                             );
                           }
                     })}
+                  
+                    <div className='submit_button'>
+                        <button  className='btn btn-primary'>
+                            Submit
+                        </button>
+                    </div>
                     {/* <div style={{ marginTop: '20px', }}>
                         <div className='row'>
                             <div className='col-md-6'>
