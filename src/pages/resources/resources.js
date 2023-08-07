@@ -27,12 +27,13 @@ const Resources = () => {
       }
       formData.append('interests', interest);
       formData.append('filetype', fileType);
-      
+      console.log(formData,'formdata');
       const response = await axios.post('http://localhost:5000/api/v1/resourse/resourceupload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(response,'response');
     } catch (ex) {
 
     }
@@ -98,7 +99,7 @@ const Resources = () => {
 
                   </div>
                   <div>
-                    <select style={{ position: 'relative', display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 4 }}>
+                    <select style={{  display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 4 }}>
                       <option>Select Upload File Type</option>
                       <option value="pdf">PDF</option>
                       <option value="audio">Audio</option>
