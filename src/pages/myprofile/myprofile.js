@@ -20,6 +20,7 @@ const MyProfile = () => {
     try {
       const localprofiledata = await localStorage.getItem('profiledata');
       const parsedLocalprofiledata = JSON.parse(localprofiledata)
+      // const pdata = parsedLocalprofiledata?.user ? parsedLocalprofiledata.user : parsedLocalprofiledata
       if (parsedLocalprofiledata && parsedLocalprofiledata.email) {
         setUser(parsedLocalprofiledata)
         setName(parsedLocalprofiledata.full_name)
@@ -28,9 +29,10 @@ const MyProfile = () => {
       } else {
         const localdata = await localStorage.getItem('logindata');
         const parsedData = JSON.parse(localdata)
-        const getuserDetails = await getUserProfile(parsedData._id)
+        const pdata = parsedData?.user ? parsedData.user : parsedData
+        const getuserDetails = await getUserProfile(pdata._id)
         if (getuserDetails) {
-          setUser(parsedData)
+          setUser(pdata)
           setName(getuserDetails.full_name)
           setEmail(getuserDetails.email)
           setMobnumber(getuserDetails.mobile)
@@ -59,6 +61,7 @@ const MyProfile = () => {
         full_name: fullName,
         mobile: mobnumber
       }
+      console.log(obj,'obj');
       const updatedData = await updateProfile(userDetails._id, obj)
       const data = JSON.stringify(updatedData.user); // Convert to JSON string
       const savedLocal = await localStorage.setItem('profiledata', data)
