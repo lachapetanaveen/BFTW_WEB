@@ -49,6 +49,7 @@ export default function Header() {
     await localStorage.removeItem('token');
     await localStorage.removeItem('logindata');
     await localStorage.removeItem('profiledata');
+    await localStorage.removeItem('qans')
     await localStorage.setItem('loggedIn',false);
     navigate('/home')
   }

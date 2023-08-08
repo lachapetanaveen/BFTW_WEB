@@ -2,8 +2,11 @@ import React, { Component, useState } from 'react';
 import Header from '../../components/header';
 import questionArray from '../../components/questions.json'
 import './afterregister.css';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AfterRegister = () => {
+    let location = useLocation();
+    const navigate = useNavigate()
     const [answers, setAnswers] = useState({});
 
     const handleAnswerChange = (questionId, answer) => {
@@ -26,7 +29,15 @@ const AfterRegister = () => {
           });
       };
  
-   
+   const regconditions = async() => {
+    if(answers){
+        await localStorage.setItem('qans',JSON.stringify(answers))
+            await localStorage.setItem('logindata',JSON.stringify(location.state.data))
+                    await localStorage.setItem("token", JSON.stringify(location.state.data.token));
+                  await localStorage.setItem("loggedIn", true);
+                  navigate('/AllUsers');
+    }
+   }
     console.log(answers,'answers');
     return (
         <>
@@ -120,7 +131,7 @@ const AfterRegister = () => {
                     })}
                   
                     <div className='submit_button'>
-                        <button  className='btn btn-primary'>
+                        <button onClick={() => regconditions()}  className='btn btn-primary'>
                             Submit
                         </button>
                     </div>

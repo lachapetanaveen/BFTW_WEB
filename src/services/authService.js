@@ -10,7 +10,16 @@ export const loginAuth = async (data) => {
         throw error;
     }
 };
-
+export const register = async (data) => {
+    try {
+        
+        const url = `${'/auth/signup'}`;
+        const response = await axiosInstance.post(url, data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 export const getUserProfile = async (id) => {
     try {
         const url = `${"/users/"}${id}`;

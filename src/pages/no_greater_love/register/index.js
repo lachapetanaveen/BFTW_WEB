@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import Header from '../../../components/header';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { register } from '../../../services/authService';
 
 const Register = () => {
     let navigate = useNavigate()
@@ -16,12 +17,45 @@ const Register = () => {
     const [city, setCity] = useState('');
     const [zipcode, setZipcode] = useState('');
     const [address, setAddress] = useState('');
-    const sendnext = () => {
+    const [password,setPassword] = useState('');
+    const [email,setEmail] = useState('');
+    const [mobile,setMobile] = useState('')
+    const sendnext = async() => {
         if(!firstname){
             toast.error('Enter First Name');
+        }else if(!email){
+            toast.error('Enter Email');
+        }else if(!mobile){
+            toast.error('Enter Mobile');
         }else{
-            navigate('/afterregister')
+            try {
+                const obj ={
+                    full_name:firstname,
+                    email:email,
+                    mobile:mobile,
+                    password_hash:password,
+                    user_type:"A"
+                  }
+                  const logindata = await register(obj)
+                  if (logindata) {
+                    toast.success('Registered SuccessFully');
+                    navigate('/afterregister',{state:{data:logindata}})
+                    // alert("login successful");
+                //     await localStorage.setItem('logindata',JSON.stringify(logindata))
+                //     await localStorage.setItem("token", JSON.stringify(logindata.token));
+                //   await localStorage.setItem("loggedIn", true);
+                //   navigate('/AllUsers')
+                    // window.location.href = "./userDetails";
+                  }
+                
+            } catch (ex) {
+                
+            }
+            
         }
+    }
+    const reset = () => {
+
     }
     return (
         <>
@@ -46,7 +80,7 @@ const Register = () => {
                                         value={firstname}
                                         contentEditable={true}
                                         onChange={(e) => setFirstName(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8,zIndex:-1 }}
 
                                     />
                                 </div>
@@ -60,7 +94,7 @@ const Register = () => {
                                         value={middlename}
                                         contentEditable={true}
                                         onChange={(e) => setMiddleName(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
 
                                     />
                                 </div>
@@ -74,28 +108,50 @@ const Register = () => {
                                         value={lastname}
                                         contentEditable={true}
                                         onChange={(e) => setLastName(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
                             </div>
                             <div style={{ marginTop: '40px' }} className='row'>
                                 <div className='col-md-4'>
-                                    <label className="text-csm">Select Email or Mobile</label>
-                                    <select onChange={(e) => setSelectvalue(e.target.value)} style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}>
+                                <label className="text-csm">Email</label>
+                                    <input
+                                        type="text"
+                                        placeholder='Enter Email'
+                                        aria-label="Email"
+                                        id="email"
+                                        value={email}
+                                        contentEditable={true}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                    />
+                                    {/* <label className="text-csm">Select Email or Mobile</label>
+                                    <select onChange={(e) => setSelectvalue(e.target.value)} style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}>
                                         <option value="email">Email</option>
                                         <option value="mobile">Mobile</option>
-                                    </select>
+                                    </select> */}
                                 </div>
                                 <div className='col-md-4'>
-                                    <label className="text-csm">Enter {selectvalue.charAt(0).toUpperCase() + selectvalue.slice(1)}</label>
+                                <label className="text-csm">Mobile</label>
+                                    <input
+                                        type="text"
+                                        placeholder='Enter Mobile'
+                                        aria-label="Mobile"
+                                        id="mobile"
+                                        value={mobile}
+                                        contentEditable={true}
+                                        onChange={(e) => setMobile(e.target.value)}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                    />
+                                    {/* <label className="text-csm">Enter {selectvalue.charAt(0).toUpperCase() + selectvalue.slice(1)}</label>
                                     <input
                                         type="text"
                                         placeholder={`Enter ${selectvalue.charAt(0).toUpperCase() + selectvalue.slice(1)}`}
                                         value={selectedvalue}
                                         contentEditable={true}
                                         onChange={(e) => setSelectedvalue(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
-                                    />
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                    /> */}
                                 </div>
                                 <div className='col-md-4'>
                                     <label className="text-csm">Title(Optional)</label>
@@ -107,14 +163,14 @@ const Register = () => {
                                         value={title}
                                         contentEditable={true}
                                         onChange={(e) => setTitle(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
                             </div>
                             <div style={{ marginTop: '40px' }} className='row'>
                                 <div className='col-md-4'>
                                     <label className="text-csm">Select Country</label>
-                                    <select value={country} onChange={(e) => setCountry(e.target.value)} style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}>
+                                    <select value={country} onChange={(e) => setCountry(e.target.value)} style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}>
                                         <option>Select Country</option>
                                         <option value="india">India</option>
                                         <option value="australia">Australia</option>
@@ -129,7 +185,7 @@ const Register = () => {
                                         value={statevalue}
                                         contentEditable={true}
                                         onChange={(e) => setStatevalue(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
                                 <div className='col-md-4'>
@@ -142,7 +198,7 @@ const Register = () => {
                                         value={city}
                                         contentEditable={true}
                                         onChange={(e) => setCity(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
                             </div>
@@ -158,7 +214,7 @@ const Register = () => {
                                         value={zipcode}
                                         contentEditable={true}
                                         onChange={(e) => setZipcode(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
                                 <div className='col-md-4'>
@@ -171,15 +227,32 @@ const Register = () => {
                                         value={address}
                                         contentEditable={true}
                                         onChange={(e) => setAddress(e.target.value)}
-                                        style={{ position: 'relative', display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
                                     />
                                 </div>
-                                <div className='col-md-4 d-flex align-items-end'>
-                                    <button onClick={() => sendnext()} style={{ width: '100%' }} type="submit" className="btn btn-lg btn-primary">
-                                        Register
-                                    </button>
+                                <div className='col-md-4'>
+                                <label className="text-csm">Password</label>
+                                    <input
+                                        type="text"
+                                        placeholder='Enter Password'
+                                        aria-label="password"
+                                        id="password"
+                                        value={password}
+                                        contentEditable={true}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 8 }}
+                                    />
                                 </div>
                             </div>
+                            <div style={{float:'right'}}>
+                            <button onClick={() => sendnext()} style={{marginTop:'20px'}}  type="submit" className="btn btn-md btn-primary">
+                                        Register
+                                    </button>
+                                    <button onClick={() => reset()} style={{marginTop:'20px',marginLeft:'10px'}}  type="submit" className="btn btn-md btn-primary">
+                                        Reset
+                                    </button>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
