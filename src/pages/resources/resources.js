@@ -3,7 +3,10 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Button from "@mui/material/Button";
 import axios from 'axios';
-import {Interests} from '../../constants/constants'
+import { Interests } from '../../constants/constants'
+import { toast } from 'react-toastify';
+import { uploadresourse } from '../../services/resourseService';
+
 const Resources = () => {
   const [files, setFiles] = useState([]);
   const [interest, setInterest] = useState([]);
@@ -27,15 +30,12 @@ const Resources = () => {
       }
       formData.append('interests', interest);
       formData.append('filetype', fileType);
-      console.log(formData,'formdata');
-      const response = await axios.post('http://localhost:5000/api/v1/resourse/resourceupload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log(response,'response');
+      console.log(formData, 'formdata');
+      const response = await uploadresourse(formData)
+      console.log(response, 'response');
+      toast.success('Resourses Upload SuccessFully')
     } catch (ex) {
-
+      toast.error('Something Went Wrong')
     }
   }
   const handleselect = (item) => {
@@ -74,15 +74,15 @@ const Resources = () => {
                     <h6 style={{ marginTop: '20px' }}>Choose Interests : </h6>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                     {Interests.map((item,index) => {
-                      return(
-                        <div style={{ display: 'flex',marginLeft: '16px' }}>
-                        <input checked={interest.includes(item)} onChange={() => handleselect(item)} style={{ marginRight: '6px' }} type="checkbox" />
-                        <label style={{ marginTop: '10px' }}>{item === 'cwc' ? 'Connect With Church' : item === 'ms' ? 'More Scripture' : item}</label>
-                      </div>
-                      )
-                     })}
-                      
+                      {Interests.map((item, index) => {
+                        return (
+                          <div style={{ display: 'flex', marginLeft: '16px' }}>
+                            <input checked={interest.includes(item)} onChange={() => handleselect(item)} style={{ marginRight: '6px' }} type="checkbox" />
+                            <label style={{ marginTop: '10px' }}>{item === 'cwc' ? 'Connect With Church' : item === 'ms' ? 'More Scripture' : item}</label>
+                          </div>
+                        )
+                      })}
+
                       {/* <div style={{ display: 'flex', marginLeft: '16px' }}>
                         <input checked={interest.includes('Counselling')} onChange={() => handleselect('Counselling')} style={{ marginRight: '6px' }} type="checkbox" />
                         <label style={{ marginTop: '10px' }}>Counselling</label>
@@ -99,7 +99,7 @@ const Resources = () => {
 
                   </div>
                   <div>
-                    <select style={{  display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 4 }}>
+                    <select style={{ display: 'block', borderRadius: 10, width: '100%', height: '40px', borderColor: 'gray', borderWidth: 0.5, padding: 4 }}>
                       <option>Select Upload File Type</option>
                       <option value="pdf">PDF</option>
                       <option value="audio">Audio</option>
