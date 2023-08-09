@@ -8,7 +8,6 @@ const AfterRegister = () => {
     let location = useLocation();
     const navigate = useNavigate()
     const [answers, setAnswers] = useState({});
-
     const handleAnswerChange = (questionId, answer) => {
         setAnswers(prevAnswers => {
             // Check if this question has conditions on others
@@ -40,6 +39,7 @@ const AfterRegister = () => {
    }
     console.log(answers,'answers');
     return (
+        
         <>
             <div className='app_container'>
 

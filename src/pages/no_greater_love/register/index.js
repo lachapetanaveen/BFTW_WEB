@@ -39,7 +39,7 @@ const Register = () => {
                   const logindata = await register(obj)
                   if (logindata) {
                     toast.success('Registered SuccessFully');
-                    navigate('/afterregister',{state:{data:logindata}})
+                    navigate('/questionstepper',{state:{data:logindata}})
                     // alert("login successful");
                 //     await localStorage.setItem('logindata',JSON.stringify(logindata))
                 //     await localStorage.setItem("token", JSON.stringify(logindata.token));
@@ -49,7 +49,10 @@ const Register = () => {
                   }
                 
             } catch (ex) {
-                
+                console.log(ex.response.status >= 400,'response');
+                if(ex && ex.response.status >= 400){
+                    toast.error(ex.response.data.msg);
+                }
             }
             
         }
