@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
-import { FaTimes } from "react-icons/fa";
+
 
 const QuestionsStepper = () => {
     let location = useLocation();
@@ -16,6 +16,7 @@ const QuestionsStepper = () => {
 
   const [activeStep, setActiveStep] = useState(1);
   const [answers, setAnswers] = useState({});
+  const [q2banswer,setq2bAnswer] = useState('')
 //   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleAnswerChange = (questionId, answer) => {
@@ -32,6 +33,10 @@ const QuestionsStepper = () => {
         });
         console.log(updatedAnswers,'updatedAnswers');
         // Update the answer for the current question
+        if(questionId === 'q2b'){
+          setq2bAnswer(answer)
+        }
+       
         updatedAnswers[questionId] = answer;
   
         return updatedAnswers;
@@ -45,7 +50,8 @@ const QuestionsStepper = () => {
     return stepQuestions.every(question => {
       if (question.condtions && question.condtions.length > 0) {
         return question.condtions.every(condition => {
-          return answers[condition.questionId] === condition.value;
+          const conditionAnswer = answers[condition.questionId];
+          return conditionAnswer === condition.value;
         });
       }
       return true;
@@ -54,15 +60,15 @@ const QuestionsStepper = () => {
   const handleNext = () => {
     if (isStepValid(activeStep)) {
         let nextStep = activeStep + 1;
-  
-        while (nextStep <= questionArray[questionArray.length - 1].step) {
+        const maxStep = Math.max(...questionArray.map(question => question.step));
+        while (nextStep <= maxStep) {
           if (!isStepValid(nextStep)) {
             nextStep++;
           } else {
             break;
           }
         }
-  
+    
         setActiveStep(nextStep);
       }
   };
@@ -107,7 +113,7 @@ console.log(stepQuestions,'stepQuestions');
               );
             });
             console.log(conditionsSatisfied,'conditionsSatisfied');
-          if (conditionsSatisfied || conditionsSatisfied.length === 0) {
+          if (conditionsSatisfied || condtions.length === 0) {
             return(
                 <div key={id} className="card_question">
                 <div style={{marginTop:'20px'}}>{questionText}</div>
@@ -131,10 +137,10 @@ console.log(stepQuestions,'stepQuestions');
                        onChange={(e) => handleAnswerChange(id, e.target.value)}
                        style={{  display: 'block', borderRadius: '10px', width: '100%', height: '36px', borderColor: 'gray', borderWidth: 0.5, padding: 8,marginTop:'10px' }}
                      />
-                       :type === "link" ? 
-                       <h6 style={{ textAlign: 'center', marginTop: '14px', cursor: 'pointer' }}><a style={{ textAlign: 'center', textDecoration: 'underline' }}>Please Click here to download or go to Play Store/App Store and download "No Greater Love"</a></h6>:null
-                 }
-                 {reqfields && reqfields.length > 0 ? 
+                       :type === "link" || (q2banswer === 'yes' ) ? 
+                       <h6 style={{ textAlign: 'center', marginTop: '14px', cursor: 'pointer' }}><a style={{ textAlign: 'center', textDecoration: 'underline' }}>Please Click here to download or go to Play Store/App Store and download "No Greater Love"</a></h6>:
+                       type === 'reqfields'  ? 
+                 reqfields && reqfields.length > 0 ? 
                     reqfields.map(k => {
                      return(
                         <div>
@@ -171,10 +177,11 @@ console.log(stepQuestions,'stepQuestions');
                       
                      )
                     })
-                     :null
+                     :null:null
                  }
+                
                 </div>
-                 
+              
                </div>
             )
           }
