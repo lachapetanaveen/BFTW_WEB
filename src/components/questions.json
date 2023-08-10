@@ -206,7 +206,7 @@
             }
         ],
         "key":"q6b",
-        "step":6
+        "step":7
     },
     {
         "id":"q6c",
@@ -233,7 +233,7 @@
         ],
         "reqfields":[],
         "key":"q6c",
-        "step":6
+        "step":8
     },
     {
         "id":"q7a",
@@ -255,7 +255,7 @@
         ],
         "reqfields":[],
         "key":"q7a",
-        "step":7
+        "step":9
     },
     {
         "id":"q8a",
@@ -282,7 +282,7 @@
         ],
         "reqfields":[],
         "key":"q8a",
-        "step":8
+        "step":10
     },
     {
         "id":"q8b",
@@ -309,7 +309,7 @@
         ],
         "reqfields":[],
         "key":"q8b",
-        "step":8
+        "step":11
     },
     {
         "id":"q2b",
@@ -323,23 +323,6 @@
         "step":1
     },
     {
-        "id":"q2blink",
-        "type":"link",
-        "question":"",
-        "options" :["yes","no"],
-        "title" : "",
-        "condtions":[
-            {
-                "questionId": "q2b",
-                "operator": "equals",
-                "value": "yes"
-            }  
-        ],
-        "reqfields":[],
-        "key":"q2blink",
-        "step":1
-    },
-    {
         "id":"q9a",
         "type":"text",
         "question":"Where did you receive the No Greater Love Booklet",
@@ -348,6 +331,6 @@
         "condtions":[],
         "reqfields":[],
         "key":"q9a",
-        "step":9
+        "step":12
     }
 ]
