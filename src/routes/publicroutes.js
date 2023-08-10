@@ -6,6 +6,7 @@ import About from '../pages/about/about';
 import ContactUs from '../pages/contact/contact';
 import Register from '../pages/no_greater_love/register';
 import AfterRegister from '../pages/no_greater_love/afterregister';
+import QuestionsStepper from '../pages/no_greater_love/questions.stepper';
 
 
 const PublicRoutes = () => {
@@ -18,6 +19,7 @@ const PublicRoutes = () => {
         <Route path='/contact' element={<ContactUs/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='/afterregister' element={<AfterRegister/>} />
+        <Route path='/questionstepper' element={<QuestionsStepper/>} />
        </Routes>
        </>
      );
