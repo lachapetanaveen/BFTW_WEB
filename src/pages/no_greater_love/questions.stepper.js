@@ -42,6 +42,20 @@ const QuestionsStepper = () => {
         return updatedAnswers;
       });
   };
+  const handleBack = () => {
+    if (activeStep > 1) {
+      let prevStep = activeStep - 1;
+      while (prevStep >= 1) {
+        if (!isStepValid(prevStep)) {
+          prevStep--;
+        } else {
+          break;
+        }
+      }
+  
+      setActiveStep(prevStep);
+    }
+  };
   const isStepValid = step => {
     const stepQuestions = questionArray.filter(
       question => question.step === step
@@ -198,6 +212,11 @@ console.log(stepQuestions,'stepQuestions');
           {renderStep(activeStep)}
 
           <div className='stepper_buttons'>
+          {activeStep > 1 && (
+              <button onClick={handleBack} className='btn btn-primary'>
+                Back
+              </button>
+            )}
           {activeStep !== questionArray[questionArray.length - 1].step && (
             <button
               disabled={!isStepValid(activeStep)}
