@@ -496,6 +496,7 @@ padding-right:10px
   font-size: 14px !important;
   margin-bottom: 10px;
 }
+
 @media (max-width: 768px) {
   .sidebar.open {
     width: 100%;

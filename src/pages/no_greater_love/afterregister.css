@@ -130,3 +130,35 @@
   .stepper_buttons button {
     margin-left: 10px;
   }
+  .stepper-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .step-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  .slide-up-enter {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  
+  .slide-up-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+  
+  .slide-up-exit {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .slide-up-exit-active {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
