@@ -1,13 +1,13 @@
-import React, { Component, useEffect } from 'react';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../components/footer';
+import Header from '../../components/header';
 
 
 const Home = () => {
@@ -36,7 +36,7 @@ const getdata = async() => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          Paragraph 1
         </Typography>
         <Typography style={{fontSize:'15px'}}variant="body2" color="black" >
      by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
@@ -59,7 +59,7 @@ const getdata = async() => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        Paragraph 2
         </Typography>
         <Typography style={{fontSize:'15px'}}variant="body2" color="black" >
      by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
@@ -83,7 +83,7 @@ const getdata = async() => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+        Paragraph 3
         </Typography>
         <Typography style={{fontSize:'15px'}}variant="body2" color="black" >
      by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.

@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
- const base_URL = "https://apibftw.olivetech.com/api/v1" // For PROD & DEV
-// const base_URL = "http://localhost:5000/api/v1" // FOR LOCAL SERVER
+ const base_URL = "https://apibftw.olivetech.com" // For PROD & DEV
+// const base_URL = "http://localhost:5000" // FOR LOCAL SERVER
+const sub_URL = "/api/v1"
 
 const axiosInstance = axios.create({
   baseURL: base_URL,
@@ -33,7 +34,7 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export { axiosInstance, sub_URL };
 
 
 

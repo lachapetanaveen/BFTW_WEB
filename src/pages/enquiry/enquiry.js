@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../components/header';
-import Footer from '../../components/footer';
 import { Box } from "@mui/material";
-import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
+import Modal from "@mui/material/Modal";
+import React, { useEffect, useState } from 'react';
 import { FaTimes, FaUserCircle, } from "react-icons/fa";
 import io from 'socket.io-client';
+import Footer from '../../components/footer';
+import Header from '../../components/header';
 // import { useChatState } from '../../Context/ChatProvider';
 
-import { getAllUsers } from '../../services/userService';
-import { getChatMessages, sendChatMessages, getAllChats } from '../../services/chatMessageService';
+import { getAllChats, getChatMessages, sendChatMessages } from '../../services/chatMessageService';
 const ENDPOINT = 'http://localhost:5000'
+// const ENDPOINT = 'https://apibftw.olivetech.com'
 
 let socket, selectedChatCompare;
 const EnquiryCenter = () => {
@@ -43,7 +43,7 @@ const EnquiryCenter = () => {
     const userData = storedData ? JSON.parse(storedData) : null;
     if (userData) {
       setUser(userData)
-      setupSocket(userData)
+     
     }
     // socket.on("message recieved", (newMessageRecieved) => {
     //   console.log('newMessageRecieved', newMessageRecieved)
@@ -74,9 +74,9 @@ const EnquiryCenter = () => {
 
     }
   }
-  const fetchMessages = async (user) => {
+  const fetchMessages = async (chat,user) => {
     try {
-      const data = await getChatMessages(user._id)
+      const data = await getChatMessages(chat._id)
       setChatMessages([...data]);
       socket.emit("join chat", user);
 
@@ -115,12 +115,12 @@ const EnquiryCenter = () => {
     socket.on("message recieved", (newMessageRecieved) => {
       setChatMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
 
-      if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
-        /// give notification
-      } else {
-        // Add the new message to the chatMessages state
-        setChatMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
-      }
+      // if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
+      //   /// give notification
+      // } else {
+      //   // Add the new message to the chatMessages state
+      //   setChatMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
+      // }
     })
   };
 
@@ -151,11 +151,14 @@ const EnquiryCenter = () => {
   };
 
   const handleOpen = async (chat, user) => {
+    setupSocket(user)
+    console.log('handleOpen',chat)
+    console.log('useruser',user)
     let roomId = user._id
     socket.emit("join chat", roomId)
     setEnquiryUser(user)
     setOpenedChat(chat)
-    await fetchMessages(user)
+    await fetchMessages(chat,user)
     setOpen(true)
   }
 
@@ -227,26 +230,28 @@ const EnquiryCenter = () => {
                 <FaTimes size={18} color="red" />
               </div>
             </div>
-            {chatMessages.length ? (
-              <div className="chatbox">
-                <div className="chatbox-messages">
-                  {chatMessages.map((message, index) => (
-                    <div key={index} className={`chatbox-message ${message?.sender?._id === loggedInUser._id ? 'sender-you' : 'sender-other'
-                      }`}>
-                      {message?.content}
-                    </div>
-                  ))}
-                </div>
-                <div className="chatbox-input">
-                  <input
-                    type="text"
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    placeholder="Type your message..."
-                  />
-                  <button className='themebtnbg' onClick={handleSendMessage}>Send</button>
-                </div>
-              </div>) : null}
+               <div className="chatbox">
+               <div className="chatbox-messages">
+                 {chatMessages.length ? (
+                   chatMessages.map((message, index) => (
+                     <div key={index} className={`chatbox-message ${message?.sender?._id === loggedInUser._id ? 'sender-you' : 'sender-other'}`}>
+                       {message?.content}
+                     </div>
+                   ))
+                 ) : (
+                   <div className="no-messages">No messages yet.</div>
+                 )}
+               </div>
+               <div className="chatbox-input">
+                 <input
+                   type="text"
+                   value={inputValue}
+                   onChange={handleInputChange}
+                   placeholder="Type your message..."
+                 />
+                 <button className='themebtnbg' onClick={handleSendMessage}>Send</button>
+               </div>
+             </div>
           </Box>
         </Fade>
       </Modal>

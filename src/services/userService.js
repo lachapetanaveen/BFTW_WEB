@@ -1,9 +1,9 @@
 
-import axiosInstance from './httpService';
+import { axiosInstance, sub_URL } from './httpService';
 
 export const getUserProfile = async (id) => {
     try {
-        const url = `${"/users/"}${id}`;
+        const url = `${sub_URL}${"/users/"}${id}`;
         const response = await axiosInstance.get(url);
         return response.data;
     } catch (error) {
@@ -13,7 +13,7 @@ export const getUserProfile = async (id) => {
 
 export const updateProfile = async (id, data) => {
     try {
-        const url = `${"/users/"}${id}`;
+        const url = `${sub_URL}${"/users/"}${id}`;
         const response = await axiosInstance.put(url, data);
         return response.data;
     } catch (error) {
@@ -23,7 +23,7 @@ export const updateProfile = async (id, data) => {
 export const getAllUsers = async () => {
 
     try {
-        const url = `${"/users"}`;
+        const url = `${sub_URL}${"/users"}`;
         const response = await axiosInstance.get(url);
         return response.data;
     } catch (error) {
