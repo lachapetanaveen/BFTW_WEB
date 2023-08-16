@@ -7,9 +7,10 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
+import { CSSTransition } from 'react-transition-group';
 
 
-const QuestionsStepper = () => {
+const StepperAnimation = () => {
     let location = useLocation();
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -127,6 +128,16 @@ console.log(stepQuestions,'stepQuestions');
             console.log(conditionsSatisfied,'conditionsSatisfied');
           if (conditionsSatisfied || condtions.length === 0) {
             return(
+                <CSSTransition
+                in={step === step}
+                timeout={300}
+                classNames="slide-up"
+                unmountOnExit
+              >
+                {/* <div className="step-content">
+                  Step 1 Content
+                </div> */}
+       
                 <div key={id} className="card_question">
                 <div style={{marginTop:'20px'}}>{questionText}</div>
                 <div className='card_answer'>
@@ -195,6 +206,7 @@ console.log(stepQuestions,'stepQuestions');
                 </div>
               
                </div>
+               </CSSTransition>
             )
           }
         })}
@@ -282,4 +294,4 @@ slotProps={{
      );
 }
  
-export default QuestionsStepper;
+export default StepperAnimation;
